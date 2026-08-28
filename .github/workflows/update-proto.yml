@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 24.20.0
-          npm: cache
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
