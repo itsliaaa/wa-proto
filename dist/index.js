@@ -25442,6 +25442,14 @@ export const proto = $root.proto = (() => {
                 case 38:
                     m.platform = 38;
                     break;
+                case "WORK_ANDROID":
+                case 39:
+                    m.platform = 39;
+                    break;
+                case "WORK_IOS":
+                case 40:
+                    m.platform = 40;
+                    break;
                 }
                 if (d.appVersion != null) {
                     if (!$util.isObject(d.appVersion))
@@ -25921,6 +25929,8 @@ export const proto = $root.proto = (() => {
                 values[valuesById[36] = "BLUE_VR"] = 36;
                 values[valuesById[37] = "AR_WRIST"] = 37;
                 values[valuesById[38] = "WAIL"] = 38;
+                values[valuesById[39] = "WORK_ANDROID"] = 39;
+                values[valuesById[40] = "WORK_IOS"] = 40;
                 return values;
             })();
 
