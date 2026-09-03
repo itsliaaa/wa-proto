@@ -7328,6 +7328,171 @@ export const proto = $root.proto = (() => {
         return AvatarUserSettings;
     })();
 
+    proto.BackwardEdge = (function() {
+
+        function BackwardEdge(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        BackwardEdge.prototype.encryptedPrevEpochAnonId = null;
+        BackwardEdge.prototype.encryptedPrevEpochRootKey = null;
+        BackwardEdge.prototype.prevEpochRootKeyFingerprint = null;
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(BackwardEdge.prototype, "_encryptedPrevEpochAnonId", {
+            get: $util.oneOfGetter($oneOfFields = ["encryptedPrevEpochAnonId"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(BackwardEdge.prototype, "_encryptedPrevEpochRootKey", {
+            get: $util.oneOfGetter($oneOfFields = ["encryptedPrevEpochRootKey"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(BackwardEdge.prototype, "_prevEpochRootKeyFingerprint", {
+            get: $util.oneOfGetter($oneOfFields = ["prevEpochRootKeyFingerprint"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        BackwardEdge.create = function create(properties) {
+            return new BackwardEdge(properties);
+        };
+
+        BackwardEdge.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            if (m.encryptedPrevEpochAnonId != null && Object.hasOwnProperty.call(m, "encryptedPrevEpochAnonId"))
+                w.uint32(10).bytes(m.encryptedPrevEpochAnonId);
+            if (m.encryptedPrevEpochRootKey != null && Object.hasOwnProperty.call(m, "encryptedPrevEpochRootKey"))
+                w.uint32(18).bytes(m.encryptedPrevEpochRootKey);
+            if (m.prevEpochRootKeyFingerprint != null && Object.hasOwnProperty.call(m, "prevEpochRootKeyFingerprint"))
+                w.uint32(26).bytes(m.prevEpochRootKeyFingerprint);
+            return w;
+        };
+
+        BackwardEdge.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.BackwardEdge();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.encryptedPrevEpochAnonId = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.encryptedPrevEpochRootKey = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.prevEpochRootKeyFingerprint = r.bytes();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            return m;
+        };
+
+        BackwardEdge.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.BackwardEdge)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.BackwardEdge: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.BackwardEdge();
+            if (d.encryptedPrevEpochAnonId != null) {
+                if (typeof d.encryptedPrevEpochAnonId === "string")
+                    $util.base64.decode(d.encryptedPrevEpochAnonId, m.encryptedPrevEpochAnonId = $util.newBuffer($util.base64.length(d.encryptedPrevEpochAnonId)), 0);
+                else if (d.encryptedPrevEpochAnonId.length >= 0)
+                    m.encryptedPrevEpochAnonId = d.encryptedPrevEpochAnonId;
+            }
+            if (d.encryptedPrevEpochRootKey != null) {
+                if (typeof d.encryptedPrevEpochRootKey === "string")
+                    $util.base64.decode(d.encryptedPrevEpochRootKey, m.encryptedPrevEpochRootKey = $util.newBuffer($util.base64.length(d.encryptedPrevEpochRootKey)), 0);
+                else if (d.encryptedPrevEpochRootKey.length >= 0)
+                    m.encryptedPrevEpochRootKey = d.encryptedPrevEpochRootKey;
+            }
+            if (d.prevEpochRootKeyFingerprint != null) {
+                if (typeof d.prevEpochRootKeyFingerprint === "string")
+                    $util.base64.decode(d.prevEpochRootKeyFingerprint, m.prevEpochRootKeyFingerprint = $util.newBuffer($util.base64.length(d.prevEpochRootKeyFingerprint)), 0);
+                else if (d.prevEpochRootKeyFingerprint.length >= 0)
+                    m.prevEpochRootKeyFingerprint = d.prevEpochRootKeyFingerprint;
+            }
+            return m;
+        };
+
+        BackwardEdge.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (m.encryptedPrevEpochAnonId != null && Object.hasOwnProperty.call(m, "encryptedPrevEpochAnonId")) {
+                d.encryptedPrevEpochAnonId = o.bytes === String ? $util.base64.encode(m.encryptedPrevEpochAnonId, 0, m.encryptedPrevEpochAnonId.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedPrevEpochAnonId) : m.encryptedPrevEpochAnonId;
+                if (o.oneofs)
+                    d._encryptedPrevEpochAnonId = "encryptedPrevEpochAnonId";
+            }
+            if (m.encryptedPrevEpochRootKey != null && Object.hasOwnProperty.call(m, "encryptedPrevEpochRootKey")) {
+                d.encryptedPrevEpochRootKey = o.bytes === String ? $util.base64.encode(m.encryptedPrevEpochRootKey, 0, m.encryptedPrevEpochRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedPrevEpochRootKey) : m.encryptedPrevEpochRootKey;
+                if (o.oneofs)
+                    d._encryptedPrevEpochRootKey = "encryptedPrevEpochRootKey";
+            }
+            if (m.prevEpochRootKeyFingerprint != null && Object.hasOwnProperty.call(m, "prevEpochRootKeyFingerprint")) {
+                d.prevEpochRootKeyFingerprint = o.bytes === String ? $util.base64.encode(m.prevEpochRootKeyFingerprint, 0, m.prevEpochRootKeyFingerprint.length) : o.bytes === Array ? Array.prototype.slice.call(m.prevEpochRootKeyFingerprint) : m.prevEpochRootKeyFingerprint;
+                if (o.oneofs)
+                    d._prevEpochRootKeyFingerprint = "prevEpochRootKeyFingerprint";
+            }
+            return d;
+        };
+
+        BackwardEdge.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return BackwardEdge;
+    })();
+
     proto.BizAIMetadataSync = (function() {
 
         function BizAIMetadataSync(p) {
@@ -9288,6 +9453,10 @@ export const proto = $root.proto = (() => {
                     case 70:
                         m.capabilities[i] = 70;
                         break;
+                    case "AI_RICH_RESPONSE_3P_LINKING_CARD_ENABLED":
+                    case 71:
+                        m.capabilities[i] = 71;
+                        break;
                     }
                 }
             }
@@ -9391,6 +9560,7 @@ export const proto = $root.proto = (() => {
             values[valuesById[68] = "AI_RICH_RESPONSE_EMAIL_CALENDAR_ENABLED"] = 68;
             values[valuesById[69] = "AI_RICH_RESPONSE_REMINDERS_ENABLED"] = 69;
             values[valuesById[70] = "AI_STOP_GENERATION_ENABLED"] = 70;
+            values[valuesById[71] = "AI_RICH_RESPONSE_3P_LINKING_CARD_ENABLED"] = 71;
             return values;
         })();
 
@@ -20515,15 +20685,6 @@ export const proto = $root.proto = (() => {
         return BotUnifiedResponseMutation;
     })();
 
-    proto.COMMAND_COMMAND_TYPE = (function() {
-        const valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[1] = "EVERYONE"] = 1;
-        values[valuesById[2] = "SILENT"] = 2;
-        values[valuesById[3] = "AI"] = 3;
-        values[valuesById[4] = "AI_IMAGINE"] = 4;
-        return values;
-    })();
-
     proto.CallLogRecord = (function() {
 
         function CallLogRecord(p) {
@@ -27153,204 +27314,6 @@ export const proto = $root.proto = (() => {
         };
 
         return CombinedFingerprint;
-    })();
-
-    proto.Command = (function() {
-
-        function Command(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null && ks[i] !== "__proto__")
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        Command.prototype.commandType = null;
-        Command.prototype.offset = null;
-        Command.prototype.length = null;
-        Command.prototype.validationToken = null;
-
-        let $oneOfFields;
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(Command.prototype, "_commandType", {
-            get: $util.oneOfGetter($oneOfFields = ["commandType"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(Command.prototype, "_offset", {
-            get: $util.oneOfGetter($oneOfFields = ["offset"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(Command.prototype, "_length", {
-            get: $util.oneOfGetter($oneOfFields = ["length"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(Command.prototype, "_validationToken", {
-            get: $util.oneOfGetter($oneOfFields = ["validationToken"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        Command.create = function create(properties) {
-            return new Command(properties);
-        };
-
-        Command.encode = function encode(m, w, q) {
-            if (!w)
-                w = $Writer.create();
-            if (q === undefined)
-                q = 0;
-            if (q > $util.recursionLimit)
-                throw Error("max depth exceeded");
-            if (m.commandType != null && Object.hasOwnProperty.call(m, "commandType"))
-                w.uint32(8).int32(m.commandType);
-            if (m.offset != null && Object.hasOwnProperty.call(m, "offset"))
-                w.uint32(16).uint32(m.offset);
-            if (m.length != null && Object.hasOwnProperty.call(m, "length"))
-                w.uint32(24).uint32(m.length);
-            if (m.validationToken != null && Object.hasOwnProperty.call(m, "validationToken"))
-                w.uint32(34).string(m.validationToken);
-            return w;
-        };
-
-        Command.decode = function decode(r, l, e, n) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            if (n === undefined)
-                n = 0;
-            if (n > $Reader.recursionLimit)
-                throw Error("maximum nesting depth exceeded");
-            var c, m;
-            if (l === undefined)
-                c = r.len;
-            else {
-                c = r.pos + l;
-                if (c > r.len)
-                    throw RangeError("index out of range");
-                l = r.len;
-                r.len = c;
-            }
-            m = new $root.proto.Command();
-            while (r.pos < c) {
-                var t = r.uint32();
-                if (t === e)
-                    break;
-                switch (t >>> 3) {
-                case 1: {
-                        m.commandType = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.offset = r.uint32();
-                        break;
-                    }
-                case 3: {
-                        m.length = r.uint32();
-                        break;
-                    }
-                case 4: {
-                        m.validationToken = r.string();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7, n);
-                    break;
-                }
-            }
-            if (l !== undefined) {
-                if (r.pos !== c)
-                    throw RangeError("index out of range");
-                r.len = l;
-            }
-            return m;
-        };
-
-        Command.fromObject = function fromObject(d, n) {
-            if (d instanceof $root.proto.Command)
-                return d;
-            if (!$util.isObject(d))
-                throw TypeError(".proto.Command: object expected");
-            if (n === undefined)
-                n = 0;
-            if (n > $util.recursionLimit)
-                throw Error("maximum nesting depth exceeded");
-            var m = new $root.proto.Command();
-            switch (d.commandType) {
-            default:
-                if (typeof d.commandType === "number") {
-                    m.commandType = d.commandType;
-                    break;
-                }
-                break;
-            case "EVERYONE":
-            case 1:
-                m.commandType = 1;
-                break;
-            case "SILENT":
-            case 2:
-                m.commandType = 2;
-                break;
-            case "AI":
-            case 3:
-                m.commandType = 3;
-                break;
-            case "AI_IMAGINE":
-            case 4:
-                m.commandType = 4;
-                break;
-            }
-            if (d.offset != null) {
-                m.offset = d.offset >>> 0;
-            }
-            if (d.length != null) {
-                m.length = d.length >>> 0;
-            }
-            if (d.validationToken != null) {
-                m.validationToken = String(d.validationToken);
-            }
-            return m;
-        };
-
-        Command.toObject = function toObject(m, o, q) {
-            if (!o)
-                o = {};
-            if (q === undefined)
-                q = 0;
-            if (q > $util.recursionLimit)
-                throw Error("max depth exceeded");
-            var d = {};
-            if (m.commandType != null && Object.hasOwnProperty.call(m, "commandType")) {
-                d.commandType = o.enums === String ? $root.proto.COMMAND_COMMAND_TYPE[m.commandType] === undefined ? m.commandType : $root.proto.COMMAND_COMMAND_TYPE[m.commandType] : m.commandType;
-                if (o.oneofs)
-                    d._commandType = "commandType";
-            }
-            if (m.offset != null && Object.hasOwnProperty.call(m, "offset")) {
-                d.offset = m.offset;
-                if (o.oneofs)
-                    d._offset = "offset";
-            }
-            if (m.length != null && Object.hasOwnProperty.call(m, "length")) {
-                d.length = m.length;
-                if (o.oneofs)
-                    d._length = "length";
-            }
-            if (m.validationToken != null && Object.hasOwnProperty.call(m, "validationToken")) {
-                d.validationToken = m.validationToken;
-                if (o.oneofs)
-                    d._validationToken = "validationToken";
-            }
-            return d;
-        };
-
-        Command.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return Command;
     })();
 
     proto.CommentMetadata = (function() {
@@ -34995,6 +34958,979 @@ export const proto = $root.proto = (() => {
         return Conversation;
     })();
 
+    proto.CreateBackupInput = (function() {
+
+        function CreateBackupInput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        CreateBackupInput.prototype.recoveryCode = "";
+        CreateBackupInput.prototype.userId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+
+        CreateBackupInput.create = function create(properties) {
+            return new CreateBackupInput(properties);
+        };
+
+        CreateBackupInput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(10).string(m.recoveryCode);
+            w.uint32(16).uint64(m.userId);
+            return w;
+        };
+
+        CreateBackupInput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.CreateBackupInput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.recoveryCode = r.string();
+                        break;
+                    }
+                case 2: {
+                        m.userId = r.uint64();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "recoveryCode"))
+                throw $util.ProtocolError("missing required 'recoveryCode'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "userId"))
+                throw $util.ProtocolError("missing required 'userId'", { instance: m });
+            return m;
+        };
+
+        CreateBackupInput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.CreateBackupInput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.CreateBackupInput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.CreateBackupInput();
+            if (d.recoveryCode != null) {
+                m.recoveryCode = String(d.recoveryCode);
+            }
+            if (d.userId != null) {
+                if ($util.Long)
+                    m.userId = $util.Long.fromValue(d.userId, true);
+                else if (typeof d.userId === "string")
+                    m.userId = parseInt(d.userId, 10);
+                else if (typeof d.userId === "number")
+                    m.userId = d.userId;
+                else if (typeof d.userId === "object")
+                    m.userId = new $util.LongBits(d.userId.low >>> 0, d.userId.high >>> 0).toNumber(true);
+            }
+            return m;
+        };
+
+        CreateBackupInput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.defaults) {
+                d.recoveryCode = "";
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, true);
+                    d.userId = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : typeof BigInt !== "undefined" && o.longs === BigInt ? n.toBigInt() : n;
+                } else
+                    d.userId = o.longs === String ? "0" : typeof BigInt !== "undefined" && o.longs === BigInt ? BigInt("0") : 0;
+            }
+            if (m.recoveryCode != null && Object.hasOwnProperty.call(m, "recoveryCode")) {
+                d.recoveryCode = m.recoveryCode;
+            }
+            if (m.userId != null && Object.hasOwnProperty.call(m, "userId")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.userId = typeof m.userId === "number" ? BigInt(m.userId) : $util.Long.fromBits(m.userId.low >>> 0, m.userId.high >>> 0, true).toBigInt();
+                else if (typeof m.userId === "number")
+                    d.userId = o.longs === String ? String(m.userId) : m.userId;
+                else
+                    d.userId = o.longs === String ? longToString(m.userId, true) : o.longs === Number ? longToNumber(m.userId, true) : m.userId;
+            }
+            return d;
+        };
+
+        CreateBackupInput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CreateBackupInput;
+    })();
+
+    proto.CreateBackupOutput = (function() {
+
+        function CreateBackupOutput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        CreateBackupOutput.prototype.device = null;
+        CreateBackupOutput.prototype.virtualDevice = null;
+        CreateBackupOutput.prototype.epoch0 = null;
+        CreateBackupOutput.prototype.mailboxRootKey = null;
+        CreateBackupOutput.prototype.error = null;
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(CreateBackupOutput.prototype, "_device", {
+            get: $util.oneOfGetter($oneOfFields = ["device"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(CreateBackupOutput.prototype, "_virtualDevice", {
+            get: $util.oneOfGetter($oneOfFields = ["virtualDevice"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(CreateBackupOutput.prototype, "_epoch0", {
+            get: $util.oneOfGetter($oneOfFields = ["epoch0"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(CreateBackupOutput.prototype, "_mailboxRootKey", {
+            get: $util.oneOfGetter($oneOfFields = ["mailboxRootKey"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(CreateBackupOutput.prototype, "_error", {
+            get: $util.oneOfGetter($oneOfFields = ["error"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        CreateBackupOutput.create = function create(properties) {
+            return new CreateBackupOutput(properties);
+        };
+
+        CreateBackupOutput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            if (m.device != null && Object.hasOwnProperty.call(m, "device"))
+                $root.proto.DeviceOutput.encode(m.device, w.uint32(10).fork(), q + 1).ldelim();
+            if (m.virtualDevice != null && Object.hasOwnProperty.call(m, "virtualDevice"))
+                $root.proto.VirtualDeviceOutput.encode(m.virtualDevice, w.uint32(18).fork(), q + 1).ldelim();
+            if (m.epoch0 != null && Object.hasOwnProperty.call(m, "epoch0"))
+                $root.proto.Epoch0Output.encode(m.epoch0, w.uint32(26).fork(), q + 1).ldelim();
+            if (m.mailboxRootKey != null && Object.hasOwnProperty.call(m, "mailboxRootKey"))
+                w.uint32(34).bytes(m.mailboxRootKey);
+            if (m.error != null && Object.hasOwnProperty.call(m, "error"))
+                w.uint32(42).string(m.error);
+            return w;
+        };
+
+        CreateBackupOutput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.CreateBackupOutput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.device = $root.proto.DeviceOutput.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                case 2: {
+                        m.virtualDevice = $root.proto.VirtualDeviceOutput.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                case 3: {
+                        m.epoch0 = $root.proto.Epoch0Output.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                case 4: {
+                        m.mailboxRootKey = r.bytes();
+                        break;
+                    }
+                case 5: {
+                        m.error = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            return m;
+        };
+
+        CreateBackupOutput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.CreateBackupOutput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.CreateBackupOutput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.CreateBackupOutput();
+            if (d.device != null) {
+                if (!$util.isObject(d.device))
+                    throw TypeError(".proto.CreateBackupOutput.device: object expected");
+                m.device = $root.proto.DeviceOutput.fromObject(d.device, n + 1);
+            }
+            if (d.virtualDevice != null) {
+                if (!$util.isObject(d.virtualDevice))
+                    throw TypeError(".proto.CreateBackupOutput.virtualDevice: object expected");
+                m.virtualDevice = $root.proto.VirtualDeviceOutput.fromObject(d.virtualDevice, n + 1);
+            }
+            if (d.epoch0 != null) {
+                if (!$util.isObject(d.epoch0))
+                    throw TypeError(".proto.CreateBackupOutput.epoch0: object expected");
+                m.epoch0 = $root.proto.Epoch0Output.fromObject(d.epoch0, n + 1);
+            }
+            if (d.mailboxRootKey != null) {
+                if (typeof d.mailboxRootKey === "string")
+                    $util.base64.decode(d.mailboxRootKey, m.mailboxRootKey = $util.newBuffer($util.base64.length(d.mailboxRootKey)), 0);
+                else if (d.mailboxRootKey.length >= 0)
+                    m.mailboxRootKey = d.mailboxRootKey;
+            }
+            if (d.error != null) {
+                m.error = String(d.error);
+            }
+            return m;
+        };
+
+        CreateBackupOutput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (m.device != null && Object.hasOwnProperty.call(m, "device")) {
+                d.device = $root.proto.DeviceOutput.toObject(m.device, o, q + 1);
+                if (o.oneofs)
+                    d._device = "device";
+            }
+            if (m.virtualDevice != null && Object.hasOwnProperty.call(m, "virtualDevice")) {
+                d.virtualDevice = $root.proto.VirtualDeviceOutput.toObject(m.virtualDevice, o, q + 1);
+                if (o.oneofs)
+                    d._virtualDevice = "virtualDevice";
+            }
+            if (m.epoch0 != null && Object.hasOwnProperty.call(m, "epoch0")) {
+                d.epoch0 = $root.proto.Epoch0Output.toObject(m.epoch0, o, q + 1);
+                if (o.oneofs)
+                    d._epoch0 = "epoch0";
+            }
+            if (m.mailboxRootKey != null && Object.hasOwnProperty.call(m, "mailboxRootKey")) {
+                d.mailboxRootKey = o.bytes === String ? $util.base64.encode(m.mailboxRootKey, 0, m.mailboxRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.mailboxRootKey) : m.mailboxRootKey;
+                if (o.oneofs)
+                    d._mailboxRootKey = "mailboxRootKey";
+            }
+            if (m.error != null && Object.hasOwnProperty.call(m, "error")) {
+                d.error = m.error;
+                if (o.oneofs)
+                    d._error = "error";
+            }
+            return d;
+        };
+
+        CreateBackupOutput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return CreateBackupOutput;
+    })();
+
+    proto.DecryptMessageInput = (function() {
+
+        function DecryptMessageInput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        DecryptMessageInput.prototype.epochRootKey = $util.newBuffer([]);
+        DecryptMessageInput.prototype.epochAnonId = $util.newBuffer([]);
+        DecryptMessageInput.prototype.threadId = "";
+        DecryptMessageInput.prototype.encryptionVersion = 0;
+        DecryptMessageInput.prototype.ciphertext = $util.newBuffer([]);
+
+        DecryptMessageInput.create = function create(properties) {
+            return new DecryptMessageInput(properties);
+        };
+
+        DecryptMessageInput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(10).bytes(m.epochRootKey);
+            w.uint32(18).bytes(m.epochAnonId);
+            w.uint32(26).string(m.threadId);
+            w.uint32(32).int32(m.encryptionVersion);
+            w.uint32(42).bytes(m.ciphertext);
+            return w;
+        };
+
+        DecryptMessageInput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.DecryptMessageInput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.epochRootKey = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.epochAnonId = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.threadId = r.string();
+                        break;
+                    }
+                case 4: {
+                        m.encryptionVersion = r.int32();
+                        break;
+                    }
+                case 5: {
+                        m.ciphertext = r.bytes();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "epochRootKey"))
+                throw $util.ProtocolError("missing required 'epochRootKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochAnonId"))
+                throw $util.ProtocolError("missing required 'epochAnonId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "threadId"))
+                throw $util.ProtocolError("missing required 'threadId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "encryptionVersion"))
+                throw $util.ProtocolError("missing required 'encryptionVersion'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "ciphertext"))
+                throw $util.ProtocolError("missing required 'ciphertext'", { instance: m });
+            return m;
+        };
+
+        DecryptMessageInput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.DecryptMessageInput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.DecryptMessageInput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.DecryptMessageInput();
+            if (d.epochRootKey != null) {
+                if (typeof d.epochRootKey === "string")
+                    $util.base64.decode(d.epochRootKey, m.epochRootKey = $util.newBuffer($util.base64.length(d.epochRootKey)), 0);
+                else if (d.epochRootKey.length >= 0)
+                    m.epochRootKey = d.epochRootKey;
+            }
+            if (d.epochAnonId != null) {
+                if (typeof d.epochAnonId === "string")
+                    $util.base64.decode(d.epochAnonId, m.epochAnonId = $util.newBuffer($util.base64.length(d.epochAnonId)), 0);
+                else if (d.epochAnonId.length >= 0)
+                    m.epochAnonId = d.epochAnonId;
+            }
+            if (d.threadId != null) {
+                m.threadId = String(d.threadId);
+            }
+            if (d.encryptionVersion != null) {
+                m.encryptionVersion = d.encryptionVersion | 0;
+            }
+            if (d.ciphertext != null) {
+                if (typeof d.ciphertext === "string")
+                    $util.base64.decode(d.ciphertext, m.ciphertext = $util.newBuffer($util.base64.length(d.ciphertext)), 0);
+                else if (d.ciphertext.length >= 0)
+                    m.ciphertext = d.ciphertext;
+            }
+            return m;
+        };
+
+        DecryptMessageInput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.defaults) {
+                if (o.bytes === String)
+                    d.epochRootKey = "";
+                else {
+                    d.epochRootKey = [];
+                    if (o.bytes !== Array)
+                        d.epochRootKey = $util.newBuffer(d.epochRootKey);
+                }
+                if (o.bytes === String)
+                    d.epochAnonId = "";
+                else {
+                    d.epochAnonId = [];
+                    if (o.bytes !== Array)
+                        d.epochAnonId = $util.newBuffer(d.epochAnonId);
+                }
+                d.threadId = "";
+                d.encryptionVersion = 0;
+                if (o.bytes === String)
+                    d.ciphertext = "";
+                else {
+                    d.ciphertext = [];
+                    if (o.bytes !== Array)
+                        d.ciphertext = $util.newBuffer(d.ciphertext);
+                }
+            }
+            if (m.epochRootKey != null && Object.hasOwnProperty.call(m, "epochRootKey")) {
+                d.epochRootKey = o.bytes === String ? $util.base64.encode(m.epochRootKey, 0, m.epochRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochRootKey) : m.epochRootKey;
+            }
+            if (m.epochAnonId != null && Object.hasOwnProperty.call(m, "epochAnonId")) {
+                d.epochAnonId = o.bytes === String ? $util.base64.encode(m.epochAnonId, 0, m.epochAnonId.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochAnonId) : m.epochAnonId;
+            }
+            if (m.threadId != null && Object.hasOwnProperty.call(m, "threadId")) {
+                d.threadId = m.threadId;
+            }
+            if (m.encryptionVersion != null && Object.hasOwnProperty.call(m, "encryptionVersion")) {
+                d.encryptionVersion = m.encryptionVersion;
+            }
+            if (m.ciphertext != null && Object.hasOwnProperty.call(m, "ciphertext")) {
+                d.ciphertext = o.bytes === String ? $util.base64.encode(m.ciphertext, 0, m.ciphertext.length) : o.bytes === Array ? Array.prototype.slice.call(m.ciphertext) : m.ciphertext;
+            }
+            return d;
+        };
+
+        DecryptMessageInput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return DecryptMessageInput;
+    })();
+
+    proto.DecryptMessageOutput = (function() {
+
+        function DecryptMessageOutput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        DecryptMessageOutput.prototype.plaintextPayload = null;
+        DecryptMessageOutput.prototype.error = null;
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(DecryptMessageOutput.prototype, "_plaintextPayload", {
+            get: $util.oneOfGetter($oneOfFields = ["plaintextPayload"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(DecryptMessageOutput.prototype, "_error", {
+            get: $util.oneOfGetter($oneOfFields = ["error"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        DecryptMessageOutput.create = function create(properties) {
+            return new DecryptMessageOutput(properties);
+        };
+
+        DecryptMessageOutput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            if (m.plaintextPayload != null && Object.hasOwnProperty.call(m, "plaintextPayload"))
+                w.uint32(10).bytes(m.plaintextPayload);
+            if (m.error != null && Object.hasOwnProperty.call(m, "error"))
+                w.uint32(18).string(m.error);
+            return w;
+        };
+
+        DecryptMessageOutput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.DecryptMessageOutput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.plaintextPayload = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.error = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            return m;
+        };
+
+        DecryptMessageOutput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.DecryptMessageOutput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.DecryptMessageOutput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.DecryptMessageOutput();
+            if (d.plaintextPayload != null) {
+                if (typeof d.plaintextPayload === "string")
+                    $util.base64.decode(d.plaintextPayload, m.plaintextPayload = $util.newBuffer($util.base64.length(d.plaintextPayload)), 0);
+                else if (d.plaintextPayload.length >= 0)
+                    m.plaintextPayload = d.plaintextPayload;
+            }
+            if (d.error != null) {
+                m.error = String(d.error);
+            }
+            return m;
+        };
+
+        DecryptMessageOutput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (m.plaintextPayload != null && Object.hasOwnProperty.call(m, "plaintextPayload")) {
+                d.plaintextPayload = o.bytes === String ? $util.base64.encode(m.plaintextPayload, 0, m.plaintextPayload.length) : o.bytes === Array ? Array.prototype.slice.call(m.plaintextPayload) : m.plaintextPayload;
+                if (o.oneofs)
+                    d._plaintextPayload = "plaintextPayload";
+            }
+            if (m.error != null && Object.hasOwnProperty.call(m, "error")) {
+                d.error = m.error;
+                if (o.oneofs)
+                    d._error = "error";
+            }
+            return d;
+        };
+
+        DecryptMessageOutput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return DecryptMessageOutput;
+    })();
+
+    proto.DeriveMessageKeyInput = (function() {
+
+        function DeriveMessageKeyInput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        DeriveMessageKeyInput.prototype.epochRootKey = $util.newBuffer([]);
+        DeriveMessageKeyInput.prototype.epochAnonId = $util.newBuffer([]);
+        DeriveMessageKeyInput.prototype.threadId = "";
+
+        DeriveMessageKeyInput.create = function create(properties) {
+            return new DeriveMessageKeyInput(properties);
+        };
+
+        DeriveMessageKeyInput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(10).bytes(m.epochRootKey);
+            w.uint32(18).bytes(m.epochAnonId);
+            w.uint32(26).string(m.threadId);
+            return w;
+        };
+
+        DeriveMessageKeyInput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.DeriveMessageKeyInput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.epochRootKey = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.epochAnonId = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.threadId = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "epochRootKey"))
+                throw $util.ProtocolError("missing required 'epochRootKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochAnonId"))
+                throw $util.ProtocolError("missing required 'epochAnonId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "threadId"))
+                throw $util.ProtocolError("missing required 'threadId'", { instance: m });
+            return m;
+        };
+
+        DeriveMessageKeyInput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.DeriveMessageKeyInput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.DeriveMessageKeyInput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.DeriveMessageKeyInput();
+            if (d.epochRootKey != null) {
+                if (typeof d.epochRootKey === "string")
+                    $util.base64.decode(d.epochRootKey, m.epochRootKey = $util.newBuffer($util.base64.length(d.epochRootKey)), 0);
+                else if (d.epochRootKey.length >= 0)
+                    m.epochRootKey = d.epochRootKey;
+            }
+            if (d.epochAnonId != null) {
+                if (typeof d.epochAnonId === "string")
+                    $util.base64.decode(d.epochAnonId, m.epochAnonId = $util.newBuffer($util.base64.length(d.epochAnonId)), 0);
+                else if (d.epochAnonId.length >= 0)
+                    m.epochAnonId = d.epochAnonId;
+            }
+            if (d.threadId != null) {
+                m.threadId = String(d.threadId);
+            }
+            return m;
+        };
+
+        DeriveMessageKeyInput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.defaults) {
+                if (o.bytes === String)
+                    d.epochRootKey = "";
+                else {
+                    d.epochRootKey = [];
+                    if (o.bytes !== Array)
+                        d.epochRootKey = $util.newBuffer(d.epochRootKey);
+                }
+                if (o.bytes === String)
+                    d.epochAnonId = "";
+                else {
+                    d.epochAnonId = [];
+                    if (o.bytes !== Array)
+                        d.epochAnonId = $util.newBuffer(d.epochAnonId);
+                }
+                d.threadId = "";
+            }
+            if (m.epochRootKey != null && Object.hasOwnProperty.call(m, "epochRootKey")) {
+                d.epochRootKey = o.bytes === String ? $util.base64.encode(m.epochRootKey, 0, m.epochRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochRootKey) : m.epochRootKey;
+            }
+            if (m.epochAnonId != null && Object.hasOwnProperty.call(m, "epochAnonId")) {
+                d.epochAnonId = o.bytes === String ? $util.base64.encode(m.epochAnonId, 0, m.epochAnonId.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochAnonId) : m.epochAnonId;
+            }
+            if (m.threadId != null && Object.hasOwnProperty.call(m, "threadId")) {
+                d.threadId = m.threadId;
+            }
+            return d;
+        };
+
+        DeriveMessageKeyInput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return DeriveMessageKeyInput;
+    })();
+
+    proto.DeriveMessageKeyOutput = (function() {
+
+        function DeriveMessageKeyOutput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        DeriveMessageKeyOutput.prototype.messageKey = null;
+        DeriveMessageKeyOutput.prototype.error = null;
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(DeriveMessageKeyOutput.prototype, "_messageKey", {
+            get: $util.oneOfGetter($oneOfFields = ["messageKey"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(DeriveMessageKeyOutput.prototype, "_error", {
+            get: $util.oneOfGetter($oneOfFields = ["error"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        DeriveMessageKeyOutput.create = function create(properties) {
+            return new DeriveMessageKeyOutput(properties);
+        };
+
+        DeriveMessageKeyOutput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            if (m.messageKey != null && Object.hasOwnProperty.call(m, "messageKey"))
+                w.uint32(10).bytes(m.messageKey);
+            if (m.error != null && Object.hasOwnProperty.call(m, "error"))
+                w.uint32(18).string(m.error);
+            return w;
+        };
+
+        DeriveMessageKeyOutput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.DeriveMessageKeyOutput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.messageKey = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.error = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            return m;
+        };
+
+        DeriveMessageKeyOutput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.DeriveMessageKeyOutput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.DeriveMessageKeyOutput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.DeriveMessageKeyOutput();
+            if (d.messageKey != null) {
+                if (typeof d.messageKey === "string")
+                    $util.base64.decode(d.messageKey, m.messageKey = $util.newBuffer($util.base64.length(d.messageKey)), 0);
+                else if (d.messageKey.length >= 0)
+                    m.messageKey = d.messageKey;
+            }
+            if (d.error != null) {
+                m.error = String(d.error);
+            }
+            return m;
+        };
+
+        DeriveMessageKeyOutput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (m.messageKey != null && Object.hasOwnProperty.call(m, "messageKey")) {
+                d.messageKey = o.bytes === String ? $util.base64.encode(m.messageKey, 0, m.messageKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.messageKey) : m.messageKey;
+                if (o.oneofs)
+                    d._messageKey = "messageKey";
+            }
+            if (m.error != null && Object.hasOwnProperty.call(m, "error")) {
+                d.error = m.error;
+                if (o.oneofs)
+                    d._error = "error";
+            }
+            return d;
+        };
+
+        DeriveMessageKeyOutput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return DeriveMessageKeyOutput;
+    })();
+
     proto.DeviceCapabilities = (function() {
 
         function DeviceCapabilities(p) {
@@ -36815,6 +37751,348 @@ export const proto = $root.proto = (() => {
         };
 
         return DeviceListMetadata;
+    })();
+
+    proto.DeviceOutput = (function() {
+
+        function DeviceOutput(p) {
+            this.supportedEncryptionVersions = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        DeviceOutput.prototype.publicKey = $util.newBuffer([]);
+        DeviceOutput.prototype.epochAuthPublicKey = $util.newBuffer([]);
+        DeviceOutput.prototype.epochAuthPublicKeySig = $util.newBuffer([]);
+        DeviceOutput.prototype.epochStoragePublicKey = $util.newBuffer([]);
+        DeviceOutput.prototype.epochStoragePublicKeySig = $util.newBuffer([]);
+        DeviceOutput.prototype.supportedEncryptionVersions = $util.emptyArray;
+        DeviceOutput.prototype.encryptionVersionSignature = $util.newBuffer([]);
+        DeviceOutput.prototype.clientVersion = 0;
+        DeviceOutput.prototype.ocmfClientState = $util.newBuffer([]);
+        DeviceOutput.prototype.epochStoragePrivateKey = $util.newBuffer([]);
+
+        DeviceOutput.create = function create(properties) {
+            return new DeviceOutput(properties);
+        };
+
+        DeviceOutput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(10).bytes(m.publicKey);
+            w.uint32(18).bytes(m.epochAuthPublicKey);
+            w.uint32(26).bytes(m.epochAuthPublicKeySig);
+            w.uint32(34).bytes(m.epochStoragePublicKey);
+            w.uint32(42).bytes(m.epochStoragePublicKeySig);
+            if (m.supportedEncryptionVersions != null && m.supportedEncryptionVersions.length) {
+                w.uint32(50).fork();
+                for (var i = 0; i < m.supportedEncryptionVersions.length; ++i)
+                    w.int32(m.supportedEncryptionVersions[i]);
+                w.ldelim();
+            }
+            w.uint32(58).bytes(m.encryptionVersionSignature);
+            w.uint32(64).int32(m.clientVersion);
+            w.uint32(74).bytes(m.ocmfClientState);
+            w.uint32(82).bytes(m.epochStoragePrivateKey);
+            return w;
+        };
+
+        DeviceOutput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.DeviceOutput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.publicKey = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.epochAuthPublicKey = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.epochAuthPublicKeySig = r.bytes();
+                        break;
+                    }
+                case 4: {
+                        m.epochStoragePublicKey = r.bytes();
+                        break;
+                    }
+                case 5: {
+                        m.epochStoragePublicKeySig = r.bytes();
+                        break;
+                    }
+                case 6: {
+                        if (!(m.supportedEncryptionVersions && m.supportedEncryptionVersions.length))
+                            m.supportedEncryptionVersions = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            if (c2 > r.len)
+                                throw RangeError("index out of range");
+                            r.len = c2;
+                            while (r.pos < c2)
+                                m.supportedEncryptionVersions.push(r.int32());
+                            if (r.pos !== c2)
+                                throw RangeError("index out of range");
+                            r.len = c;
+                        } else
+                            m.supportedEncryptionVersions.push(r.int32());
+                        break;
+                    }
+                case 7: {
+                        m.encryptionVersionSignature = r.bytes();
+                        break;
+                    }
+                case 8: {
+                        m.clientVersion = r.int32();
+                        break;
+                    }
+                case 9: {
+                        m.ocmfClientState = r.bytes();
+                        break;
+                    }
+                case 10: {
+                        m.epochStoragePrivateKey = r.bytes();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "publicKey"))
+                throw $util.ProtocolError("missing required 'publicKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochAuthPublicKey"))
+                throw $util.ProtocolError("missing required 'epochAuthPublicKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochAuthPublicKeySig"))
+                throw $util.ProtocolError("missing required 'epochAuthPublicKeySig'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochStoragePublicKey"))
+                throw $util.ProtocolError("missing required 'epochStoragePublicKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochStoragePublicKeySig"))
+                throw $util.ProtocolError("missing required 'epochStoragePublicKeySig'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "encryptionVersionSignature"))
+                throw $util.ProtocolError("missing required 'encryptionVersionSignature'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "clientVersion"))
+                throw $util.ProtocolError("missing required 'clientVersion'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "ocmfClientState"))
+                throw $util.ProtocolError("missing required 'ocmfClientState'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochStoragePrivateKey"))
+                throw $util.ProtocolError("missing required 'epochStoragePrivateKey'", { instance: m });
+            return m;
+        };
+
+        DeviceOutput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.DeviceOutput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.DeviceOutput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.DeviceOutput();
+            if (d.publicKey != null) {
+                if (typeof d.publicKey === "string")
+                    $util.base64.decode(d.publicKey, m.publicKey = $util.newBuffer($util.base64.length(d.publicKey)), 0);
+                else if (d.publicKey.length >= 0)
+                    m.publicKey = d.publicKey;
+            }
+            if (d.epochAuthPublicKey != null) {
+                if (typeof d.epochAuthPublicKey === "string")
+                    $util.base64.decode(d.epochAuthPublicKey, m.epochAuthPublicKey = $util.newBuffer($util.base64.length(d.epochAuthPublicKey)), 0);
+                else if (d.epochAuthPublicKey.length >= 0)
+                    m.epochAuthPublicKey = d.epochAuthPublicKey;
+            }
+            if (d.epochAuthPublicKeySig != null) {
+                if (typeof d.epochAuthPublicKeySig === "string")
+                    $util.base64.decode(d.epochAuthPublicKeySig, m.epochAuthPublicKeySig = $util.newBuffer($util.base64.length(d.epochAuthPublicKeySig)), 0);
+                else if (d.epochAuthPublicKeySig.length >= 0)
+                    m.epochAuthPublicKeySig = d.epochAuthPublicKeySig;
+            }
+            if (d.epochStoragePublicKey != null) {
+                if (typeof d.epochStoragePublicKey === "string")
+                    $util.base64.decode(d.epochStoragePublicKey, m.epochStoragePublicKey = $util.newBuffer($util.base64.length(d.epochStoragePublicKey)), 0);
+                else if (d.epochStoragePublicKey.length >= 0)
+                    m.epochStoragePublicKey = d.epochStoragePublicKey;
+            }
+            if (d.epochStoragePublicKeySig != null) {
+                if (typeof d.epochStoragePublicKeySig === "string")
+                    $util.base64.decode(d.epochStoragePublicKeySig, m.epochStoragePublicKeySig = $util.newBuffer($util.base64.length(d.epochStoragePublicKeySig)), 0);
+                else if (d.epochStoragePublicKeySig.length >= 0)
+                    m.epochStoragePublicKeySig = d.epochStoragePublicKeySig;
+            }
+            if (d.supportedEncryptionVersions) {
+                if (!Array.isArray(d.supportedEncryptionVersions))
+                    throw TypeError(".proto.DeviceOutput.supportedEncryptionVersions: array expected");
+                m.supportedEncryptionVersions = [];
+                for (var i = 0; i < d.supportedEncryptionVersions.length; ++i) {
+                    m.supportedEncryptionVersions[i] = d.supportedEncryptionVersions[i] | 0;
+                }
+            }
+            if (d.encryptionVersionSignature != null) {
+                if (typeof d.encryptionVersionSignature === "string")
+                    $util.base64.decode(d.encryptionVersionSignature, m.encryptionVersionSignature = $util.newBuffer($util.base64.length(d.encryptionVersionSignature)), 0);
+                else if (d.encryptionVersionSignature.length >= 0)
+                    m.encryptionVersionSignature = d.encryptionVersionSignature;
+            }
+            if (d.clientVersion != null) {
+                m.clientVersion = d.clientVersion | 0;
+            }
+            if (d.ocmfClientState != null) {
+                if (typeof d.ocmfClientState === "string")
+                    $util.base64.decode(d.ocmfClientState, m.ocmfClientState = $util.newBuffer($util.base64.length(d.ocmfClientState)), 0);
+                else if (d.ocmfClientState.length >= 0)
+                    m.ocmfClientState = d.ocmfClientState;
+            }
+            if (d.epochStoragePrivateKey != null) {
+                if (typeof d.epochStoragePrivateKey === "string")
+                    $util.base64.decode(d.epochStoragePrivateKey, m.epochStoragePrivateKey = $util.newBuffer($util.base64.length(d.epochStoragePrivateKey)), 0);
+                else if (d.epochStoragePrivateKey.length >= 0)
+                    m.epochStoragePrivateKey = d.epochStoragePrivateKey;
+            }
+            return m;
+        };
+
+        DeviceOutput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.supportedEncryptionVersions = [];
+            }
+            if (o.defaults) {
+                if (o.bytes === String)
+                    d.publicKey = "";
+                else {
+                    d.publicKey = [];
+                    if (o.bytes !== Array)
+                        d.publicKey = $util.newBuffer(d.publicKey);
+                }
+                if (o.bytes === String)
+                    d.epochAuthPublicKey = "";
+                else {
+                    d.epochAuthPublicKey = [];
+                    if (o.bytes !== Array)
+                        d.epochAuthPublicKey = $util.newBuffer(d.epochAuthPublicKey);
+                }
+                if (o.bytes === String)
+                    d.epochAuthPublicKeySig = "";
+                else {
+                    d.epochAuthPublicKeySig = [];
+                    if (o.bytes !== Array)
+                        d.epochAuthPublicKeySig = $util.newBuffer(d.epochAuthPublicKeySig);
+                }
+                if (o.bytes === String)
+                    d.epochStoragePublicKey = "";
+                else {
+                    d.epochStoragePublicKey = [];
+                    if (o.bytes !== Array)
+                        d.epochStoragePublicKey = $util.newBuffer(d.epochStoragePublicKey);
+                }
+                if (o.bytes === String)
+                    d.epochStoragePublicKeySig = "";
+                else {
+                    d.epochStoragePublicKeySig = [];
+                    if (o.bytes !== Array)
+                        d.epochStoragePublicKeySig = $util.newBuffer(d.epochStoragePublicKeySig);
+                }
+                if (o.bytes === String)
+                    d.encryptionVersionSignature = "";
+                else {
+                    d.encryptionVersionSignature = [];
+                    if (o.bytes !== Array)
+                        d.encryptionVersionSignature = $util.newBuffer(d.encryptionVersionSignature);
+                }
+                d.clientVersion = 0;
+                if (o.bytes === String)
+                    d.ocmfClientState = "";
+                else {
+                    d.ocmfClientState = [];
+                    if (o.bytes !== Array)
+                        d.ocmfClientState = $util.newBuffer(d.ocmfClientState);
+                }
+                if (o.bytes === String)
+                    d.epochStoragePrivateKey = "";
+                else {
+                    d.epochStoragePrivateKey = [];
+                    if (o.bytes !== Array)
+                        d.epochStoragePrivateKey = $util.newBuffer(d.epochStoragePrivateKey);
+                }
+            }
+            if (m.publicKey != null && Object.hasOwnProperty.call(m, "publicKey")) {
+                d.publicKey = o.bytes === String ? $util.base64.encode(m.publicKey, 0, m.publicKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.publicKey) : m.publicKey;
+            }
+            if (m.epochAuthPublicKey != null && Object.hasOwnProperty.call(m, "epochAuthPublicKey")) {
+                d.epochAuthPublicKey = o.bytes === String ? $util.base64.encode(m.epochAuthPublicKey, 0, m.epochAuthPublicKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochAuthPublicKey) : m.epochAuthPublicKey;
+            }
+            if (m.epochAuthPublicKeySig != null && Object.hasOwnProperty.call(m, "epochAuthPublicKeySig")) {
+                d.epochAuthPublicKeySig = o.bytes === String ? $util.base64.encode(m.epochAuthPublicKeySig, 0, m.epochAuthPublicKeySig.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochAuthPublicKeySig) : m.epochAuthPublicKeySig;
+            }
+            if (m.epochStoragePublicKey != null && Object.hasOwnProperty.call(m, "epochStoragePublicKey")) {
+                d.epochStoragePublicKey = o.bytes === String ? $util.base64.encode(m.epochStoragePublicKey, 0, m.epochStoragePublicKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochStoragePublicKey) : m.epochStoragePublicKey;
+            }
+            if (m.epochStoragePublicKeySig != null && Object.hasOwnProperty.call(m, "epochStoragePublicKeySig")) {
+                d.epochStoragePublicKeySig = o.bytes === String ? $util.base64.encode(m.epochStoragePublicKeySig, 0, m.epochStoragePublicKeySig.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochStoragePublicKeySig) : m.epochStoragePublicKeySig;
+            }
+            if (m.supportedEncryptionVersions && m.supportedEncryptionVersions.length) {
+                d.supportedEncryptionVersions = [];
+                for (var j = 0; j < m.supportedEncryptionVersions.length; ++j) {
+                    d.supportedEncryptionVersions[j] = m.supportedEncryptionVersions[j];
+                }
+            }
+            if (m.encryptionVersionSignature != null && Object.hasOwnProperty.call(m, "encryptionVersionSignature")) {
+                d.encryptionVersionSignature = o.bytes === String ? $util.base64.encode(m.encryptionVersionSignature, 0, m.encryptionVersionSignature.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptionVersionSignature) : m.encryptionVersionSignature;
+            }
+            if (m.clientVersion != null && Object.hasOwnProperty.call(m, "clientVersion")) {
+                d.clientVersion = m.clientVersion;
+            }
+            if (m.ocmfClientState != null && Object.hasOwnProperty.call(m, "ocmfClientState")) {
+                d.ocmfClientState = o.bytes === String ? $util.base64.encode(m.ocmfClientState, 0, m.ocmfClientState.length) : o.bytes === Array ? Array.prototype.slice.call(m.ocmfClientState) : m.ocmfClientState;
+            }
+            if (m.epochStoragePrivateKey != null && Object.hasOwnProperty.call(m, "epochStoragePrivateKey")) {
+                d.epochStoragePrivateKey = o.bytes === String ? $util.base64.encode(m.epochStoragePrivateKey, 0, m.epochStoragePrivateKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochStoragePrivateKey) : m.epochStoragePrivateKey;
+            }
+            return d;
+        };
+
+        DeviceOutput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return DeviceOutput;
     })();
 
     proto.DeviceProps = (function() {
@@ -38934,6 +40212,622 @@ export const proto = $root.proto = (() => {
         return EmbeddedMusic;
     })();
 
+    proto.EncryptMessageInput = (function() {
+
+        function EncryptMessageInput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        EncryptMessageInput.prototype.epochRootKey = $util.newBuffer([]);
+        EncryptMessageInput.prototype.mailboxRootKey = $util.newBuffer([]);
+        EncryptMessageInput.prototype.orfClientState = $util.newBuffer([]);
+        EncryptMessageInput.prototype.epochAnonId = $util.newBuffer([]);
+        EncryptMessageInput.prototype.epochId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        EncryptMessageInput.prototype.threadId = "";
+        EncryptMessageInput.prototype.waCanonicalUserFbid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        EncryptMessageInput.prototype.timestampMs = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        EncryptMessageInput.prototype.backupId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        EncryptMessageInput.prototype.plaintextPayload = $util.newBuffer([]);
+        EncryptMessageInput.prototype.stanzaId = "";
+
+        EncryptMessageInput.create = function create(properties) {
+            return new EncryptMessageInput(properties);
+        };
+
+        EncryptMessageInput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(10).bytes(m.epochRootKey);
+            w.uint32(18).bytes(m.mailboxRootKey);
+            w.uint32(26).bytes(m.orfClientState);
+            w.uint32(34).bytes(m.epochAnonId);
+            w.uint32(40).uint64(m.epochId);
+            w.uint32(50).string(m.threadId);
+            w.uint32(56).uint64(m.waCanonicalUserFbid);
+            w.uint32(64).uint64(m.timestampMs);
+            w.uint32(72).uint64(m.backupId);
+            w.uint32(82).bytes(m.plaintextPayload);
+            w.uint32(90).string(m.stanzaId);
+            return w;
+        };
+
+        EncryptMessageInput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.EncryptMessageInput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.epochRootKey = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.mailboxRootKey = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.orfClientState = r.bytes();
+                        break;
+                    }
+                case 4: {
+                        m.epochAnonId = r.bytes();
+                        break;
+                    }
+                case 5: {
+                        m.epochId = r.uint64();
+                        break;
+                    }
+                case 6: {
+                        m.threadId = r.string();
+                        break;
+                    }
+                case 7: {
+                        m.waCanonicalUserFbid = r.uint64();
+                        break;
+                    }
+                case 8: {
+                        m.timestampMs = r.uint64();
+                        break;
+                    }
+                case 9: {
+                        m.backupId = r.uint64();
+                        break;
+                    }
+                case 10: {
+                        m.plaintextPayload = r.bytes();
+                        break;
+                    }
+                case 11: {
+                        m.stanzaId = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "epochRootKey"))
+                throw $util.ProtocolError("missing required 'epochRootKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "mailboxRootKey"))
+                throw $util.ProtocolError("missing required 'mailboxRootKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "orfClientState"))
+                throw $util.ProtocolError("missing required 'orfClientState'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochAnonId"))
+                throw $util.ProtocolError("missing required 'epochAnonId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochId"))
+                throw $util.ProtocolError("missing required 'epochId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "threadId"))
+                throw $util.ProtocolError("missing required 'threadId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "waCanonicalUserFbid"))
+                throw $util.ProtocolError("missing required 'waCanonicalUserFbid'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "timestampMs"))
+                throw $util.ProtocolError("missing required 'timestampMs'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "backupId"))
+                throw $util.ProtocolError("missing required 'backupId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "plaintextPayload"))
+                throw $util.ProtocolError("missing required 'plaintextPayload'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "stanzaId"))
+                throw $util.ProtocolError("missing required 'stanzaId'", { instance: m });
+            return m;
+        };
+
+        EncryptMessageInput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.EncryptMessageInput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.EncryptMessageInput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.EncryptMessageInput();
+            if (d.epochRootKey != null) {
+                if (typeof d.epochRootKey === "string")
+                    $util.base64.decode(d.epochRootKey, m.epochRootKey = $util.newBuffer($util.base64.length(d.epochRootKey)), 0);
+                else if (d.epochRootKey.length >= 0)
+                    m.epochRootKey = d.epochRootKey;
+            }
+            if (d.mailboxRootKey != null) {
+                if (typeof d.mailboxRootKey === "string")
+                    $util.base64.decode(d.mailboxRootKey, m.mailboxRootKey = $util.newBuffer($util.base64.length(d.mailboxRootKey)), 0);
+                else if (d.mailboxRootKey.length >= 0)
+                    m.mailboxRootKey = d.mailboxRootKey;
+            }
+            if (d.orfClientState != null) {
+                if (typeof d.orfClientState === "string")
+                    $util.base64.decode(d.orfClientState, m.orfClientState = $util.newBuffer($util.base64.length(d.orfClientState)), 0);
+                else if (d.orfClientState.length >= 0)
+                    m.orfClientState = d.orfClientState;
+            }
+            if (d.epochAnonId != null) {
+                if (typeof d.epochAnonId === "string")
+                    $util.base64.decode(d.epochAnonId, m.epochAnonId = $util.newBuffer($util.base64.length(d.epochAnonId)), 0);
+                else if (d.epochAnonId.length >= 0)
+                    m.epochAnonId = d.epochAnonId;
+            }
+            if (d.epochId != null) {
+                if ($util.Long)
+                    m.epochId = $util.Long.fromValue(d.epochId, true);
+                else if (typeof d.epochId === "string")
+                    m.epochId = parseInt(d.epochId, 10);
+                else if (typeof d.epochId === "number")
+                    m.epochId = d.epochId;
+                else if (typeof d.epochId === "object")
+                    m.epochId = new $util.LongBits(d.epochId.low >>> 0, d.epochId.high >>> 0).toNumber(true);
+            }
+            if (d.threadId != null) {
+                m.threadId = String(d.threadId);
+            }
+            if (d.waCanonicalUserFbid != null) {
+                if ($util.Long)
+                    m.waCanonicalUserFbid = $util.Long.fromValue(d.waCanonicalUserFbid, true);
+                else if (typeof d.waCanonicalUserFbid === "string")
+                    m.waCanonicalUserFbid = parseInt(d.waCanonicalUserFbid, 10);
+                else if (typeof d.waCanonicalUserFbid === "number")
+                    m.waCanonicalUserFbid = d.waCanonicalUserFbid;
+                else if (typeof d.waCanonicalUserFbid === "object")
+                    m.waCanonicalUserFbid = new $util.LongBits(d.waCanonicalUserFbid.low >>> 0, d.waCanonicalUserFbid.high >>> 0).toNumber(true);
+            }
+            if (d.timestampMs != null) {
+                if ($util.Long)
+                    m.timestampMs = $util.Long.fromValue(d.timestampMs, true);
+                else if (typeof d.timestampMs === "string")
+                    m.timestampMs = parseInt(d.timestampMs, 10);
+                else if (typeof d.timestampMs === "number")
+                    m.timestampMs = d.timestampMs;
+                else if (typeof d.timestampMs === "object")
+                    m.timestampMs = new $util.LongBits(d.timestampMs.low >>> 0, d.timestampMs.high >>> 0).toNumber(true);
+            }
+            if (d.backupId != null) {
+                if ($util.Long)
+                    m.backupId = $util.Long.fromValue(d.backupId, true);
+                else if (typeof d.backupId === "string")
+                    m.backupId = parseInt(d.backupId, 10);
+                else if (typeof d.backupId === "number")
+                    m.backupId = d.backupId;
+                else if (typeof d.backupId === "object")
+                    m.backupId = new $util.LongBits(d.backupId.low >>> 0, d.backupId.high >>> 0).toNumber(true);
+            }
+            if (d.plaintextPayload != null) {
+                if (typeof d.plaintextPayload === "string")
+                    $util.base64.decode(d.plaintextPayload, m.plaintextPayload = $util.newBuffer($util.base64.length(d.plaintextPayload)), 0);
+                else if (d.plaintextPayload.length >= 0)
+                    m.plaintextPayload = d.plaintextPayload;
+            }
+            if (d.stanzaId != null) {
+                m.stanzaId = String(d.stanzaId);
+            }
+            return m;
+        };
+
+        EncryptMessageInput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.defaults) {
+                if (o.bytes === String)
+                    d.epochRootKey = "";
+                else {
+                    d.epochRootKey = [];
+                    if (o.bytes !== Array)
+                        d.epochRootKey = $util.newBuffer(d.epochRootKey);
+                }
+                if (o.bytes === String)
+                    d.mailboxRootKey = "";
+                else {
+                    d.mailboxRootKey = [];
+                    if (o.bytes !== Array)
+                        d.mailboxRootKey = $util.newBuffer(d.mailboxRootKey);
+                }
+                if (o.bytes === String)
+                    d.orfClientState = "";
+                else {
+                    d.orfClientState = [];
+                    if (o.bytes !== Array)
+                        d.orfClientState = $util.newBuffer(d.orfClientState);
+                }
+                if (o.bytes === String)
+                    d.epochAnonId = "";
+                else {
+                    d.epochAnonId = [];
+                    if (o.bytes !== Array)
+                        d.epochAnonId = $util.newBuffer(d.epochAnonId);
+                }
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, true);
+                    d.epochId = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : typeof BigInt !== "undefined" && o.longs === BigInt ? n.toBigInt() : n;
+                } else
+                    d.epochId = o.longs === String ? "0" : typeof BigInt !== "undefined" && o.longs === BigInt ? BigInt("0") : 0;
+                d.threadId = "";
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, true);
+                    d.waCanonicalUserFbid = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : typeof BigInt !== "undefined" && o.longs === BigInt ? n.toBigInt() : n;
+                } else
+                    d.waCanonicalUserFbid = o.longs === String ? "0" : typeof BigInt !== "undefined" && o.longs === BigInt ? BigInt("0") : 0;
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, true);
+                    d.timestampMs = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : typeof BigInt !== "undefined" && o.longs === BigInt ? n.toBigInt() : n;
+                } else
+                    d.timestampMs = o.longs === String ? "0" : typeof BigInt !== "undefined" && o.longs === BigInt ? BigInt("0") : 0;
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, true);
+                    d.backupId = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : typeof BigInt !== "undefined" && o.longs === BigInt ? n.toBigInt() : n;
+                } else
+                    d.backupId = o.longs === String ? "0" : typeof BigInt !== "undefined" && o.longs === BigInt ? BigInt("0") : 0;
+                if (o.bytes === String)
+                    d.plaintextPayload = "";
+                else {
+                    d.plaintextPayload = [];
+                    if (o.bytes !== Array)
+                        d.plaintextPayload = $util.newBuffer(d.plaintextPayload);
+                }
+                d.stanzaId = "";
+            }
+            if (m.epochRootKey != null && Object.hasOwnProperty.call(m, "epochRootKey")) {
+                d.epochRootKey = o.bytes === String ? $util.base64.encode(m.epochRootKey, 0, m.epochRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochRootKey) : m.epochRootKey;
+            }
+            if (m.mailboxRootKey != null && Object.hasOwnProperty.call(m, "mailboxRootKey")) {
+                d.mailboxRootKey = o.bytes === String ? $util.base64.encode(m.mailboxRootKey, 0, m.mailboxRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.mailboxRootKey) : m.mailboxRootKey;
+            }
+            if (m.orfClientState != null && Object.hasOwnProperty.call(m, "orfClientState")) {
+                d.orfClientState = o.bytes === String ? $util.base64.encode(m.orfClientState, 0, m.orfClientState.length) : o.bytes === Array ? Array.prototype.slice.call(m.orfClientState) : m.orfClientState;
+            }
+            if (m.epochAnonId != null && Object.hasOwnProperty.call(m, "epochAnonId")) {
+                d.epochAnonId = o.bytes === String ? $util.base64.encode(m.epochAnonId, 0, m.epochAnonId.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochAnonId) : m.epochAnonId;
+            }
+            if (m.epochId != null && Object.hasOwnProperty.call(m, "epochId")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.epochId = typeof m.epochId === "number" ? BigInt(m.epochId) : $util.Long.fromBits(m.epochId.low >>> 0, m.epochId.high >>> 0, true).toBigInt();
+                else if (typeof m.epochId === "number")
+                    d.epochId = o.longs === String ? String(m.epochId) : m.epochId;
+                else
+                    d.epochId = o.longs === String ? longToString(m.epochId, true) : o.longs === Number ? longToNumber(m.epochId, true) : m.epochId;
+            }
+            if (m.threadId != null && Object.hasOwnProperty.call(m, "threadId")) {
+                d.threadId = m.threadId;
+            }
+            if (m.waCanonicalUserFbid != null && Object.hasOwnProperty.call(m, "waCanonicalUserFbid")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.waCanonicalUserFbid = typeof m.waCanonicalUserFbid === "number" ? BigInt(m.waCanonicalUserFbid) : $util.Long.fromBits(m.waCanonicalUserFbid.low >>> 0, m.waCanonicalUserFbid.high >>> 0, true).toBigInt();
+                else if (typeof m.waCanonicalUserFbid === "number")
+                    d.waCanonicalUserFbid = o.longs === String ? String(m.waCanonicalUserFbid) : m.waCanonicalUserFbid;
+                else
+                    d.waCanonicalUserFbid = o.longs === String ? longToString(m.waCanonicalUserFbid, true) : o.longs === Number ? longToNumber(m.waCanonicalUserFbid, true) : m.waCanonicalUserFbid;
+            }
+            if (m.timestampMs != null && Object.hasOwnProperty.call(m, "timestampMs")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.timestampMs = typeof m.timestampMs === "number" ? BigInt(m.timestampMs) : $util.Long.fromBits(m.timestampMs.low >>> 0, m.timestampMs.high >>> 0, true).toBigInt();
+                else if (typeof m.timestampMs === "number")
+                    d.timestampMs = o.longs === String ? String(m.timestampMs) : m.timestampMs;
+                else
+                    d.timestampMs = o.longs === String ? longToString(m.timestampMs, true) : o.longs === Number ? longToNumber(m.timestampMs, true) : m.timestampMs;
+            }
+            if (m.backupId != null && Object.hasOwnProperty.call(m, "backupId")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.backupId = typeof m.backupId === "number" ? BigInt(m.backupId) : $util.Long.fromBits(m.backupId.low >>> 0, m.backupId.high >>> 0, true).toBigInt();
+                else if (typeof m.backupId === "number")
+                    d.backupId = o.longs === String ? String(m.backupId) : m.backupId;
+                else
+                    d.backupId = o.longs === String ? longToString(m.backupId, true) : o.longs === Number ? longToNumber(m.backupId, true) : m.backupId;
+            }
+            if (m.plaintextPayload != null && Object.hasOwnProperty.call(m, "plaintextPayload")) {
+                d.plaintextPayload = o.bytes === String ? $util.base64.encode(m.plaintextPayload, 0, m.plaintextPayload.length) : o.bytes === Array ? Array.prototype.slice.call(m.plaintextPayload) : m.plaintextPayload;
+            }
+            if (m.stanzaId != null && Object.hasOwnProperty.call(m, "stanzaId")) {
+                d.stanzaId = m.stanzaId;
+            }
+            return d;
+        };
+
+        EncryptMessageInput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return EncryptMessageInput;
+    })();
+
+    proto.EncryptMessageOutput = (function() {
+
+        function EncryptMessageOutput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        EncryptMessageOutput.prototype.encryptedProtobuf = null;
+        EncryptMessageOutput.prototype.orfThreadId = null;
+        EncryptMessageOutput.prototype.valueSecretRef = null;
+        EncryptMessageOutput.prototype.offlineThreadingId = null;
+        EncryptMessageOutput.prototype.timestampMs = null;
+        EncryptMessageOutput.prototype.error = null;
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(EncryptMessageOutput.prototype, "_encryptedProtobuf", {
+            get: $util.oneOfGetter($oneOfFields = ["encryptedProtobuf"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(EncryptMessageOutput.prototype, "_orfThreadId", {
+            get: $util.oneOfGetter($oneOfFields = ["orfThreadId"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(EncryptMessageOutput.prototype, "_valueSecretRef", {
+            get: $util.oneOfGetter($oneOfFields = ["valueSecretRef"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(EncryptMessageOutput.prototype, "_offlineThreadingId", {
+            get: $util.oneOfGetter($oneOfFields = ["offlineThreadingId"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(EncryptMessageOutput.prototype, "_timestampMs", {
+            get: $util.oneOfGetter($oneOfFields = ["timestampMs"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(EncryptMessageOutput.prototype, "_error", {
+            get: $util.oneOfGetter($oneOfFields = ["error"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        EncryptMessageOutput.create = function create(properties) {
+            return new EncryptMessageOutput(properties);
+        };
+
+        EncryptMessageOutput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            if (m.encryptedProtobuf != null && Object.hasOwnProperty.call(m, "encryptedProtobuf"))
+                w.uint32(10).bytes(m.encryptedProtobuf);
+            if (m.orfThreadId != null && Object.hasOwnProperty.call(m, "orfThreadId"))
+                w.uint32(18).bytes(m.orfThreadId);
+            if (m.valueSecretRef != null && Object.hasOwnProperty.call(m, "valueSecretRef"))
+                w.uint32(26).string(m.valueSecretRef);
+            if (m.offlineThreadingId != null && Object.hasOwnProperty.call(m, "offlineThreadingId"))
+                w.uint32(32).uint64(m.offlineThreadingId);
+            if (m.timestampMs != null && Object.hasOwnProperty.call(m, "timestampMs"))
+                w.uint32(40).uint64(m.timestampMs);
+            if (m.error != null && Object.hasOwnProperty.call(m, "error"))
+                w.uint32(58).string(m.error);
+            return w;
+        };
+
+        EncryptMessageOutput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.EncryptMessageOutput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.encryptedProtobuf = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.orfThreadId = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.valueSecretRef = r.string();
+                        break;
+                    }
+                case 4: {
+                        m.offlineThreadingId = r.uint64();
+                        break;
+                    }
+                case 5: {
+                        m.timestampMs = r.uint64();
+                        break;
+                    }
+                case 7: {
+                        m.error = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            return m;
+        };
+
+        EncryptMessageOutput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.EncryptMessageOutput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.EncryptMessageOutput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.EncryptMessageOutput();
+            if (d.encryptedProtobuf != null) {
+                if (typeof d.encryptedProtobuf === "string")
+                    $util.base64.decode(d.encryptedProtobuf, m.encryptedProtobuf = $util.newBuffer($util.base64.length(d.encryptedProtobuf)), 0);
+                else if (d.encryptedProtobuf.length >= 0)
+                    m.encryptedProtobuf = d.encryptedProtobuf;
+            }
+            if (d.orfThreadId != null) {
+                if (typeof d.orfThreadId === "string")
+                    $util.base64.decode(d.orfThreadId, m.orfThreadId = $util.newBuffer($util.base64.length(d.orfThreadId)), 0);
+                else if (d.orfThreadId.length >= 0)
+                    m.orfThreadId = d.orfThreadId;
+            }
+            if (d.valueSecretRef != null) {
+                m.valueSecretRef = String(d.valueSecretRef);
+            }
+            if (d.offlineThreadingId != null) {
+                if ($util.Long)
+                    m.offlineThreadingId = $util.Long.fromValue(d.offlineThreadingId, true);
+                else if (typeof d.offlineThreadingId === "string")
+                    m.offlineThreadingId = parseInt(d.offlineThreadingId, 10);
+                else if (typeof d.offlineThreadingId === "number")
+                    m.offlineThreadingId = d.offlineThreadingId;
+                else if (typeof d.offlineThreadingId === "object")
+                    m.offlineThreadingId = new $util.LongBits(d.offlineThreadingId.low >>> 0, d.offlineThreadingId.high >>> 0).toNumber(true);
+            }
+            if (d.timestampMs != null) {
+                if ($util.Long)
+                    m.timestampMs = $util.Long.fromValue(d.timestampMs, true);
+                else if (typeof d.timestampMs === "string")
+                    m.timestampMs = parseInt(d.timestampMs, 10);
+                else if (typeof d.timestampMs === "number")
+                    m.timestampMs = d.timestampMs;
+                else if (typeof d.timestampMs === "object")
+                    m.timestampMs = new $util.LongBits(d.timestampMs.low >>> 0, d.timestampMs.high >>> 0).toNumber(true);
+            }
+            if (d.error != null) {
+                m.error = String(d.error);
+            }
+            return m;
+        };
+
+        EncryptMessageOutput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (m.encryptedProtobuf != null && Object.hasOwnProperty.call(m, "encryptedProtobuf")) {
+                d.encryptedProtobuf = o.bytes === String ? $util.base64.encode(m.encryptedProtobuf, 0, m.encryptedProtobuf.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedProtobuf) : m.encryptedProtobuf;
+                if (o.oneofs)
+                    d._encryptedProtobuf = "encryptedProtobuf";
+            }
+            if (m.orfThreadId != null && Object.hasOwnProperty.call(m, "orfThreadId")) {
+                d.orfThreadId = o.bytes === String ? $util.base64.encode(m.orfThreadId, 0, m.orfThreadId.length) : o.bytes === Array ? Array.prototype.slice.call(m.orfThreadId) : m.orfThreadId;
+                if (o.oneofs)
+                    d._orfThreadId = "orfThreadId";
+            }
+            if (m.valueSecretRef != null && Object.hasOwnProperty.call(m, "valueSecretRef")) {
+                d.valueSecretRef = m.valueSecretRef;
+                if (o.oneofs)
+                    d._valueSecretRef = "valueSecretRef";
+            }
+            if (m.offlineThreadingId != null && Object.hasOwnProperty.call(m, "offlineThreadingId")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.offlineThreadingId = typeof m.offlineThreadingId === "number" ? BigInt(m.offlineThreadingId) : $util.Long.fromBits(m.offlineThreadingId.low >>> 0, m.offlineThreadingId.high >>> 0, true).toBigInt();
+                else if (typeof m.offlineThreadingId === "number")
+                    d.offlineThreadingId = o.longs === String ? String(m.offlineThreadingId) : m.offlineThreadingId;
+                else
+                    d.offlineThreadingId = o.longs === String ? longToString(m.offlineThreadingId, true) : o.longs === Number ? longToNumber(m.offlineThreadingId, true) : m.offlineThreadingId;
+                if (o.oneofs)
+                    d._offlineThreadingId = "offlineThreadingId";
+            }
+            if (m.timestampMs != null && Object.hasOwnProperty.call(m, "timestampMs")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.timestampMs = typeof m.timestampMs === "number" ? BigInt(m.timestampMs) : $util.Long.fromBits(m.timestampMs.low >>> 0, m.timestampMs.high >>> 0, true).toBigInt();
+                else if (typeof m.timestampMs === "number")
+                    d.timestampMs = o.longs === String ? String(m.timestampMs) : m.timestampMs;
+                else
+                    d.timestampMs = o.longs === String ? longToString(m.timestampMs, true) : o.longs === Number ? longToNumber(m.timestampMs, true) : m.timestampMs;
+                if (o.oneofs)
+                    d._timestampMs = "timestampMs";
+            }
+            if (m.error != null && Object.hasOwnProperty.call(m, "error")) {
+                d.error = m.error;
+                if (o.oneofs)
+                    d._error = "error";
+            }
+            return d;
+        };
+
+        EncryptMessageOutput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return EncryptMessageOutput;
+    })();
+
     proto.EncryptedPairingRequest = (function() {
 
         function EncryptedPairingRequest(p) {
@@ -39073,6 +40967,293 @@ export const proto = $root.proto = (() => {
         };
 
         return EncryptedPairingRequest;
+    })();
+
+    proto.EncryptedSecretValuesOutput = (function() {
+
+        function EncryptedSecretValuesOutput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        EncryptedSecretValuesOutput.prototype.encryptedDevicePrivateKey = $util.newBuffer([]);
+        EncryptedSecretValuesOutput.prototype.encryptedObliviousValidationTokenBlob = $util.newBuffer([]);
+        EncryptedSecretValuesOutput.prototype.encryptedEpochStoragePrivateKey = $util.newBuffer([]);
+        EncryptedSecretValuesOutput.prototype.encryptedOcmfClientState = $util.newBuffer([]);
+        EncryptedSecretValuesOutput.prototype.encryptedOrfClientStateV2 = null;
+        EncryptedSecretValuesOutput.prototype.encryptedMailboxRootKeyBlob = $util.newBuffer([]);
+        EncryptedSecretValuesOutput.prototype.encryptedEpochAnonId = $util.newBuffer([]);
+        EncryptedSecretValuesOutput.prototype.encryptedEpochRootKey = $util.newBuffer([]);
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(EncryptedSecretValuesOutput.prototype, "_encryptedOrfClientStateV2", {
+            get: $util.oneOfGetter($oneOfFields = ["encryptedOrfClientStateV2"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        EncryptedSecretValuesOutput.create = function create(properties) {
+            return new EncryptedSecretValuesOutput(properties);
+        };
+
+        EncryptedSecretValuesOutput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(10).bytes(m.encryptedDevicePrivateKey);
+            w.uint32(18).bytes(m.encryptedObliviousValidationTokenBlob);
+            w.uint32(26).bytes(m.encryptedEpochStoragePrivateKey);
+            w.uint32(34).bytes(m.encryptedOcmfClientState);
+            if (m.encryptedOrfClientStateV2 != null && Object.hasOwnProperty.call(m, "encryptedOrfClientStateV2"))
+                w.uint32(42).bytes(m.encryptedOrfClientStateV2);
+            w.uint32(50).bytes(m.encryptedMailboxRootKeyBlob);
+            w.uint32(58).bytes(m.encryptedEpochAnonId);
+            w.uint32(66).bytes(m.encryptedEpochRootKey);
+            return w;
+        };
+
+        EncryptedSecretValuesOutput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.EncryptedSecretValuesOutput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.encryptedDevicePrivateKey = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.encryptedObliviousValidationTokenBlob = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.encryptedEpochStoragePrivateKey = r.bytes();
+                        break;
+                    }
+                case 4: {
+                        m.encryptedOcmfClientState = r.bytes();
+                        break;
+                    }
+                case 5: {
+                        m.encryptedOrfClientStateV2 = r.bytes();
+                        break;
+                    }
+                case 6: {
+                        m.encryptedMailboxRootKeyBlob = r.bytes();
+                        break;
+                    }
+                case 7: {
+                        m.encryptedEpochAnonId = r.bytes();
+                        break;
+                    }
+                case 8: {
+                        m.encryptedEpochRootKey = r.bytes();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "encryptedDevicePrivateKey"))
+                throw $util.ProtocolError("missing required 'encryptedDevicePrivateKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "encryptedObliviousValidationTokenBlob"))
+                throw $util.ProtocolError("missing required 'encryptedObliviousValidationTokenBlob'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "encryptedEpochStoragePrivateKey"))
+                throw $util.ProtocolError("missing required 'encryptedEpochStoragePrivateKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "encryptedOcmfClientState"))
+                throw $util.ProtocolError("missing required 'encryptedOcmfClientState'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "encryptedMailboxRootKeyBlob"))
+                throw $util.ProtocolError("missing required 'encryptedMailboxRootKeyBlob'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "encryptedEpochAnonId"))
+                throw $util.ProtocolError("missing required 'encryptedEpochAnonId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "encryptedEpochRootKey"))
+                throw $util.ProtocolError("missing required 'encryptedEpochRootKey'", { instance: m });
+            return m;
+        };
+
+        EncryptedSecretValuesOutput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.EncryptedSecretValuesOutput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.EncryptedSecretValuesOutput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.EncryptedSecretValuesOutput();
+            if (d.encryptedDevicePrivateKey != null) {
+                if (typeof d.encryptedDevicePrivateKey === "string")
+                    $util.base64.decode(d.encryptedDevicePrivateKey, m.encryptedDevicePrivateKey = $util.newBuffer($util.base64.length(d.encryptedDevicePrivateKey)), 0);
+                else if (d.encryptedDevicePrivateKey.length >= 0)
+                    m.encryptedDevicePrivateKey = d.encryptedDevicePrivateKey;
+            }
+            if (d.encryptedObliviousValidationTokenBlob != null) {
+                if (typeof d.encryptedObliviousValidationTokenBlob === "string")
+                    $util.base64.decode(d.encryptedObliviousValidationTokenBlob, m.encryptedObliviousValidationTokenBlob = $util.newBuffer($util.base64.length(d.encryptedObliviousValidationTokenBlob)), 0);
+                else if (d.encryptedObliviousValidationTokenBlob.length >= 0)
+                    m.encryptedObliviousValidationTokenBlob = d.encryptedObliviousValidationTokenBlob;
+            }
+            if (d.encryptedEpochStoragePrivateKey != null) {
+                if (typeof d.encryptedEpochStoragePrivateKey === "string")
+                    $util.base64.decode(d.encryptedEpochStoragePrivateKey, m.encryptedEpochStoragePrivateKey = $util.newBuffer($util.base64.length(d.encryptedEpochStoragePrivateKey)), 0);
+                else if (d.encryptedEpochStoragePrivateKey.length >= 0)
+                    m.encryptedEpochStoragePrivateKey = d.encryptedEpochStoragePrivateKey;
+            }
+            if (d.encryptedOcmfClientState != null) {
+                if (typeof d.encryptedOcmfClientState === "string")
+                    $util.base64.decode(d.encryptedOcmfClientState, m.encryptedOcmfClientState = $util.newBuffer($util.base64.length(d.encryptedOcmfClientState)), 0);
+                else if (d.encryptedOcmfClientState.length >= 0)
+                    m.encryptedOcmfClientState = d.encryptedOcmfClientState;
+            }
+            if (d.encryptedOrfClientStateV2 != null) {
+                if (typeof d.encryptedOrfClientStateV2 === "string")
+                    $util.base64.decode(d.encryptedOrfClientStateV2, m.encryptedOrfClientStateV2 = $util.newBuffer($util.base64.length(d.encryptedOrfClientStateV2)), 0);
+                else if (d.encryptedOrfClientStateV2.length >= 0)
+                    m.encryptedOrfClientStateV2 = d.encryptedOrfClientStateV2;
+            }
+            if (d.encryptedMailboxRootKeyBlob != null) {
+                if (typeof d.encryptedMailboxRootKeyBlob === "string")
+                    $util.base64.decode(d.encryptedMailboxRootKeyBlob, m.encryptedMailboxRootKeyBlob = $util.newBuffer($util.base64.length(d.encryptedMailboxRootKeyBlob)), 0);
+                else if (d.encryptedMailboxRootKeyBlob.length >= 0)
+                    m.encryptedMailboxRootKeyBlob = d.encryptedMailboxRootKeyBlob;
+            }
+            if (d.encryptedEpochAnonId != null) {
+                if (typeof d.encryptedEpochAnonId === "string")
+                    $util.base64.decode(d.encryptedEpochAnonId, m.encryptedEpochAnonId = $util.newBuffer($util.base64.length(d.encryptedEpochAnonId)), 0);
+                else if (d.encryptedEpochAnonId.length >= 0)
+                    m.encryptedEpochAnonId = d.encryptedEpochAnonId;
+            }
+            if (d.encryptedEpochRootKey != null) {
+                if (typeof d.encryptedEpochRootKey === "string")
+                    $util.base64.decode(d.encryptedEpochRootKey, m.encryptedEpochRootKey = $util.newBuffer($util.base64.length(d.encryptedEpochRootKey)), 0);
+                else if (d.encryptedEpochRootKey.length >= 0)
+                    m.encryptedEpochRootKey = d.encryptedEpochRootKey;
+            }
+            return m;
+        };
+
+        EncryptedSecretValuesOutput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.defaults) {
+                if (o.bytes === String)
+                    d.encryptedDevicePrivateKey = "";
+                else {
+                    d.encryptedDevicePrivateKey = [];
+                    if (o.bytes !== Array)
+                        d.encryptedDevicePrivateKey = $util.newBuffer(d.encryptedDevicePrivateKey);
+                }
+                if (o.bytes === String)
+                    d.encryptedObliviousValidationTokenBlob = "";
+                else {
+                    d.encryptedObliviousValidationTokenBlob = [];
+                    if (o.bytes !== Array)
+                        d.encryptedObliviousValidationTokenBlob = $util.newBuffer(d.encryptedObliviousValidationTokenBlob);
+                }
+                if (o.bytes === String)
+                    d.encryptedEpochStoragePrivateKey = "";
+                else {
+                    d.encryptedEpochStoragePrivateKey = [];
+                    if (o.bytes !== Array)
+                        d.encryptedEpochStoragePrivateKey = $util.newBuffer(d.encryptedEpochStoragePrivateKey);
+                }
+                if (o.bytes === String)
+                    d.encryptedOcmfClientState = "";
+                else {
+                    d.encryptedOcmfClientState = [];
+                    if (o.bytes !== Array)
+                        d.encryptedOcmfClientState = $util.newBuffer(d.encryptedOcmfClientState);
+                }
+                if (o.bytes === String)
+                    d.encryptedMailboxRootKeyBlob = "";
+                else {
+                    d.encryptedMailboxRootKeyBlob = [];
+                    if (o.bytes !== Array)
+                        d.encryptedMailboxRootKeyBlob = $util.newBuffer(d.encryptedMailboxRootKeyBlob);
+                }
+                if (o.bytes === String)
+                    d.encryptedEpochAnonId = "";
+                else {
+                    d.encryptedEpochAnonId = [];
+                    if (o.bytes !== Array)
+                        d.encryptedEpochAnonId = $util.newBuffer(d.encryptedEpochAnonId);
+                }
+                if (o.bytes === String)
+                    d.encryptedEpochRootKey = "";
+                else {
+                    d.encryptedEpochRootKey = [];
+                    if (o.bytes !== Array)
+                        d.encryptedEpochRootKey = $util.newBuffer(d.encryptedEpochRootKey);
+                }
+            }
+            if (m.encryptedDevicePrivateKey != null && Object.hasOwnProperty.call(m, "encryptedDevicePrivateKey")) {
+                d.encryptedDevicePrivateKey = o.bytes === String ? $util.base64.encode(m.encryptedDevicePrivateKey, 0, m.encryptedDevicePrivateKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedDevicePrivateKey) : m.encryptedDevicePrivateKey;
+            }
+            if (m.encryptedObliviousValidationTokenBlob != null && Object.hasOwnProperty.call(m, "encryptedObliviousValidationTokenBlob")) {
+                d.encryptedObliviousValidationTokenBlob = o.bytes === String ? $util.base64.encode(m.encryptedObliviousValidationTokenBlob, 0, m.encryptedObliviousValidationTokenBlob.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedObliviousValidationTokenBlob) : m.encryptedObliviousValidationTokenBlob;
+            }
+            if (m.encryptedEpochStoragePrivateKey != null && Object.hasOwnProperty.call(m, "encryptedEpochStoragePrivateKey")) {
+                d.encryptedEpochStoragePrivateKey = o.bytes === String ? $util.base64.encode(m.encryptedEpochStoragePrivateKey, 0, m.encryptedEpochStoragePrivateKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedEpochStoragePrivateKey) : m.encryptedEpochStoragePrivateKey;
+            }
+            if (m.encryptedOcmfClientState != null && Object.hasOwnProperty.call(m, "encryptedOcmfClientState")) {
+                d.encryptedOcmfClientState = o.bytes === String ? $util.base64.encode(m.encryptedOcmfClientState, 0, m.encryptedOcmfClientState.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedOcmfClientState) : m.encryptedOcmfClientState;
+            }
+            if (m.encryptedOrfClientStateV2 != null && Object.hasOwnProperty.call(m, "encryptedOrfClientStateV2")) {
+                d.encryptedOrfClientStateV2 = o.bytes === String ? $util.base64.encode(m.encryptedOrfClientStateV2, 0, m.encryptedOrfClientStateV2.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedOrfClientStateV2) : m.encryptedOrfClientStateV2;
+                if (o.oneofs)
+                    d._encryptedOrfClientStateV2 = "encryptedOrfClientStateV2";
+            }
+            if (m.encryptedMailboxRootKeyBlob != null && Object.hasOwnProperty.call(m, "encryptedMailboxRootKeyBlob")) {
+                d.encryptedMailboxRootKeyBlob = o.bytes === String ? $util.base64.encode(m.encryptedMailboxRootKeyBlob, 0, m.encryptedMailboxRootKeyBlob.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedMailboxRootKeyBlob) : m.encryptedMailboxRootKeyBlob;
+            }
+            if (m.encryptedEpochAnonId != null && Object.hasOwnProperty.call(m, "encryptedEpochAnonId")) {
+                d.encryptedEpochAnonId = o.bytes === String ? $util.base64.encode(m.encryptedEpochAnonId, 0, m.encryptedEpochAnonId.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedEpochAnonId) : m.encryptedEpochAnonId;
+            }
+            if (m.encryptedEpochRootKey != null && Object.hasOwnProperty.call(m, "encryptedEpochRootKey")) {
+                d.encryptedEpochRootKey = o.bytes === String ? $util.base64.encode(m.encryptedEpochRootKey, 0, m.encryptedEpochRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedEpochRootKey) : m.encryptedEpochRootKey;
+            }
+            return d;
+        };
+
+        EncryptedSecretValuesOutput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return EncryptedSecretValuesOutput;
     })();
 
     proto.EphemeralSetting = (function() {
@@ -39220,6 +41401,276 @@ export const proto = $root.proto = (() => {
         };
 
         return EphemeralSetting;
+    })();
+
+    proto.Epoch0Output = (function() {
+
+        function Epoch0Output(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        Epoch0Output.prototype.epochFbid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        Epoch0Output.prototype.epochAnonId = $util.newBuffer([]);
+        Epoch0Output.prototype.epochData = $util.newBuffer([]);
+        Epoch0Output.prototype.wrappedRootKeyForSelf = $util.newBuffer([]);
+        Epoch0Output.prototype.epochSignature = $util.newBuffer([]);
+        Epoch0Output.prototype.epochRootKeyFingerprint = $util.newBuffer([]);
+        Epoch0Output.prototype.epochRootKey = null;
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(Epoch0Output.prototype, "_epochRootKey", {
+            get: $util.oneOfGetter($oneOfFields = ["epochRootKey"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        Epoch0Output.create = function create(properties) {
+            return new Epoch0Output(properties);
+        };
+
+        Epoch0Output.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(8).uint64(m.epochFbid);
+            w.uint32(18).bytes(m.epochAnonId);
+            w.uint32(26).bytes(m.epochData);
+            w.uint32(34).bytes(m.wrappedRootKeyForSelf);
+            w.uint32(42).bytes(m.epochSignature);
+            w.uint32(50).bytes(m.epochRootKeyFingerprint);
+            if (m.epochRootKey != null && Object.hasOwnProperty.call(m, "epochRootKey"))
+                w.uint32(58).bytes(m.epochRootKey);
+            return w;
+        };
+
+        Epoch0Output.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.Epoch0Output();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.epochFbid = r.uint64();
+                        break;
+                    }
+                case 2: {
+                        m.epochAnonId = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.epochData = r.bytes();
+                        break;
+                    }
+                case 4: {
+                        m.wrappedRootKeyForSelf = r.bytes();
+                        break;
+                    }
+                case 5: {
+                        m.epochSignature = r.bytes();
+                        break;
+                    }
+                case 6: {
+                        m.epochRootKeyFingerprint = r.bytes();
+                        break;
+                    }
+                case 7: {
+                        m.epochRootKey = r.bytes();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "epochFbid"))
+                throw $util.ProtocolError("missing required 'epochFbid'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochAnonId"))
+                throw $util.ProtocolError("missing required 'epochAnonId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochData"))
+                throw $util.ProtocolError("missing required 'epochData'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "wrappedRootKeyForSelf"))
+                throw $util.ProtocolError("missing required 'wrappedRootKeyForSelf'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochSignature"))
+                throw $util.ProtocolError("missing required 'epochSignature'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochRootKeyFingerprint"))
+                throw $util.ProtocolError("missing required 'epochRootKeyFingerprint'", { instance: m });
+            return m;
+        };
+
+        Epoch0Output.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.Epoch0Output)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.Epoch0Output: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.Epoch0Output();
+            if (d.epochFbid != null) {
+                if ($util.Long)
+                    m.epochFbid = $util.Long.fromValue(d.epochFbid, true);
+                else if (typeof d.epochFbid === "string")
+                    m.epochFbid = parseInt(d.epochFbid, 10);
+                else if (typeof d.epochFbid === "number")
+                    m.epochFbid = d.epochFbid;
+                else if (typeof d.epochFbid === "object")
+                    m.epochFbid = new $util.LongBits(d.epochFbid.low >>> 0, d.epochFbid.high >>> 0).toNumber(true);
+            }
+            if (d.epochAnonId != null) {
+                if (typeof d.epochAnonId === "string")
+                    $util.base64.decode(d.epochAnonId, m.epochAnonId = $util.newBuffer($util.base64.length(d.epochAnonId)), 0);
+                else if (d.epochAnonId.length >= 0)
+                    m.epochAnonId = d.epochAnonId;
+            }
+            if (d.epochData != null) {
+                if (typeof d.epochData === "string")
+                    $util.base64.decode(d.epochData, m.epochData = $util.newBuffer($util.base64.length(d.epochData)), 0);
+                else if (d.epochData.length >= 0)
+                    m.epochData = d.epochData;
+            }
+            if (d.wrappedRootKeyForSelf != null) {
+                if (typeof d.wrappedRootKeyForSelf === "string")
+                    $util.base64.decode(d.wrappedRootKeyForSelf, m.wrappedRootKeyForSelf = $util.newBuffer($util.base64.length(d.wrappedRootKeyForSelf)), 0);
+                else if (d.wrappedRootKeyForSelf.length >= 0)
+                    m.wrappedRootKeyForSelf = d.wrappedRootKeyForSelf;
+            }
+            if (d.epochSignature != null) {
+                if (typeof d.epochSignature === "string")
+                    $util.base64.decode(d.epochSignature, m.epochSignature = $util.newBuffer($util.base64.length(d.epochSignature)), 0);
+                else if (d.epochSignature.length >= 0)
+                    m.epochSignature = d.epochSignature;
+            }
+            if (d.epochRootKeyFingerprint != null) {
+                if (typeof d.epochRootKeyFingerprint === "string")
+                    $util.base64.decode(d.epochRootKeyFingerprint, m.epochRootKeyFingerprint = $util.newBuffer($util.base64.length(d.epochRootKeyFingerprint)), 0);
+                else if (d.epochRootKeyFingerprint.length >= 0)
+                    m.epochRootKeyFingerprint = d.epochRootKeyFingerprint;
+            }
+            if (d.epochRootKey != null) {
+                if (typeof d.epochRootKey === "string")
+                    $util.base64.decode(d.epochRootKey, m.epochRootKey = $util.newBuffer($util.base64.length(d.epochRootKey)), 0);
+                else if (d.epochRootKey.length >= 0)
+                    m.epochRootKey = d.epochRootKey;
+            }
+            return m;
+        };
+
+        Epoch0Output.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.defaults) {
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, true);
+                    d.epochFbid = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : typeof BigInt !== "undefined" && o.longs === BigInt ? n.toBigInt() : n;
+                } else
+                    d.epochFbid = o.longs === String ? "0" : typeof BigInt !== "undefined" && o.longs === BigInt ? BigInt("0") : 0;
+                if (o.bytes === String)
+                    d.epochAnonId = "";
+                else {
+                    d.epochAnonId = [];
+                    if (o.bytes !== Array)
+                        d.epochAnonId = $util.newBuffer(d.epochAnonId);
+                }
+                if (o.bytes === String)
+                    d.epochData = "";
+                else {
+                    d.epochData = [];
+                    if (o.bytes !== Array)
+                        d.epochData = $util.newBuffer(d.epochData);
+                }
+                if (o.bytes === String)
+                    d.wrappedRootKeyForSelf = "";
+                else {
+                    d.wrappedRootKeyForSelf = [];
+                    if (o.bytes !== Array)
+                        d.wrappedRootKeyForSelf = $util.newBuffer(d.wrappedRootKeyForSelf);
+                }
+                if (o.bytes === String)
+                    d.epochSignature = "";
+                else {
+                    d.epochSignature = [];
+                    if (o.bytes !== Array)
+                        d.epochSignature = $util.newBuffer(d.epochSignature);
+                }
+                if (o.bytes === String)
+                    d.epochRootKeyFingerprint = "";
+                else {
+                    d.epochRootKeyFingerprint = [];
+                    if (o.bytes !== Array)
+                        d.epochRootKeyFingerprint = $util.newBuffer(d.epochRootKeyFingerprint);
+                }
+            }
+            if (m.epochFbid != null && Object.hasOwnProperty.call(m, "epochFbid")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.epochFbid = typeof m.epochFbid === "number" ? BigInt(m.epochFbid) : $util.Long.fromBits(m.epochFbid.low >>> 0, m.epochFbid.high >>> 0, true).toBigInt();
+                else if (typeof m.epochFbid === "number")
+                    d.epochFbid = o.longs === String ? String(m.epochFbid) : m.epochFbid;
+                else
+                    d.epochFbid = o.longs === String ? longToString(m.epochFbid, true) : o.longs === Number ? longToNumber(m.epochFbid, true) : m.epochFbid;
+            }
+            if (m.epochAnonId != null && Object.hasOwnProperty.call(m, "epochAnonId")) {
+                d.epochAnonId = o.bytes === String ? $util.base64.encode(m.epochAnonId, 0, m.epochAnonId.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochAnonId) : m.epochAnonId;
+            }
+            if (m.epochData != null && Object.hasOwnProperty.call(m, "epochData")) {
+                d.epochData = o.bytes === String ? $util.base64.encode(m.epochData, 0, m.epochData.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochData) : m.epochData;
+            }
+            if (m.wrappedRootKeyForSelf != null && Object.hasOwnProperty.call(m, "wrappedRootKeyForSelf")) {
+                d.wrappedRootKeyForSelf = o.bytes === String ? $util.base64.encode(m.wrappedRootKeyForSelf, 0, m.wrappedRootKeyForSelf.length) : o.bytes === Array ? Array.prototype.slice.call(m.wrappedRootKeyForSelf) : m.wrappedRootKeyForSelf;
+            }
+            if (m.epochSignature != null && Object.hasOwnProperty.call(m, "epochSignature")) {
+                d.epochSignature = o.bytes === String ? $util.base64.encode(m.epochSignature, 0, m.epochSignature.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochSignature) : m.epochSignature;
+            }
+            if (m.epochRootKeyFingerprint != null && Object.hasOwnProperty.call(m, "epochRootKeyFingerprint")) {
+                d.epochRootKeyFingerprint = o.bytes === String ? $util.base64.encode(m.epochRootKeyFingerprint, 0, m.epochRootKeyFingerprint.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochRootKeyFingerprint) : m.epochRootKeyFingerprint;
+            }
+            if (m.epochRootKey != null && Object.hasOwnProperty.call(m, "epochRootKey")) {
+                d.epochRootKey = o.bytes === String ? $util.base64.encode(m.epochRootKey, 0, m.epochRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochRootKey) : m.epochRootKey;
+                if (o.oneofs)
+                    d._epochRootKey = "epochRootKey";
+            }
+            return d;
+        };
+
+        Epoch0Output.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Epoch0Output;
     })();
 
     proto.EventAdditionalMetadata = (function() {
@@ -39914,14 +42365,6 @@ export const proto = $root.proto = (() => {
         };
 
         return ExternalBlobReference;
-    })();
-
-    proto.FUTURE_PROOF_BEHAVIOR = (function() {
-        const valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "PLACEHOLDER"] = 0;
-        values[valuesById[1] = "NO_PLACEHOLDER"] = 1;
-        values[valuesById[2] = "IGNORE"] = 2;
-        return values;
     })();
 
     proto.Field = (function() {
@@ -47684,6 +50127,206 @@ export const proto = $root.proto = (() => {
         return LIDMigrationMappingSyncMessage;
     })();
 
+    proto.LabyrinthWaCommand = (function() {
+
+        function LabyrinthWaCommand(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        LabyrinthWaCommand.prototype.createBackupInput = null;
+        LabyrinthWaCommand.prototype.encryptMessageInput = null;
+        LabyrinthWaCommand.prototype.decryptMessageInput = null;
+        LabyrinthWaCommand.prototype.orfThreadIdInput = null;
+        LabyrinthWaCommand.prototype.deriveMessageKeyInput = null;
+        LabyrinthWaCommand.prototype.rotateEpochInput = null;
+
+        let $oneOfFields;
+
+        Object.defineProperty(LabyrinthWaCommand.prototype, "commandInput", {
+            get: $util.oneOfGetter($oneOfFields = ["createBackupInput", "encryptMessageInput", "decryptMessageInput", "orfThreadIdInput", "deriveMessageKeyInput", "rotateEpochInput"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        LabyrinthWaCommand.create = function create(properties) {
+            return new LabyrinthWaCommand(properties);
+        };
+
+        LabyrinthWaCommand.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            if (m.createBackupInput != null && Object.hasOwnProperty.call(m, "createBackupInput"))
+                $root.proto.CreateBackupInput.encode(m.createBackupInput, w.uint32(10).fork(), q + 1).ldelim();
+            if (m.encryptMessageInput != null && Object.hasOwnProperty.call(m, "encryptMessageInput"))
+                $root.proto.EncryptMessageInput.encode(m.encryptMessageInput, w.uint32(18).fork(), q + 1).ldelim();
+            if (m.decryptMessageInput != null && Object.hasOwnProperty.call(m, "decryptMessageInput"))
+                $root.proto.DecryptMessageInput.encode(m.decryptMessageInput, w.uint32(26).fork(), q + 1).ldelim();
+            if (m.orfThreadIdInput != null && Object.hasOwnProperty.call(m, "orfThreadIdInput"))
+                $root.proto.OrfThreadIdInput.encode(m.orfThreadIdInput, w.uint32(34).fork(), q + 1).ldelim();
+            if (m.deriveMessageKeyInput != null && Object.hasOwnProperty.call(m, "deriveMessageKeyInput"))
+                $root.proto.DeriveMessageKeyInput.encode(m.deriveMessageKeyInput, w.uint32(42).fork(), q + 1).ldelim();
+            if (m.rotateEpochInput != null && Object.hasOwnProperty.call(m, "rotateEpochInput"))
+                $root.proto.RotateEpochInput.encode(m.rotateEpochInput, w.uint32(50).fork(), q + 1).ldelim();
+            return w;
+        };
+
+        LabyrinthWaCommand.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.LabyrinthWaCommand();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.createBackupInput = $root.proto.CreateBackupInput.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                case 2: {
+                        m.encryptMessageInput = $root.proto.EncryptMessageInput.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                case 3: {
+                        m.decryptMessageInput = $root.proto.DecryptMessageInput.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                case 4: {
+                        m.orfThreadIdInput = $root.proto.OrfThreadIdInput.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                case 5: {
+                        m.deriveMessageKeyInput = $root.proto.DeriveMessageKeyInput.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                case 6: {
+                        m.rotateEpochInput = $root.proto.RotateEpochInput.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            return m;
+        };
+
+        LabyrinthWaCommand.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.LabyrinthWaCommand)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.LabyrinthWaCommand: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.LabyrinthWaCommand();
+            if (d.createBackupInput != null) {
+                if (!$util.isObject(d.createBackupInput))
+                    throw TypeError(".proto.LabyrinthWaCommand.createBackupInput: object expected");
+                m.createBackupInput = $root.proto.CreateBackupInput.fromObject(d.createBackupInput, n + 1);
+            }
+            if (d.encryptMessageInput != null) {
+                if (!$util.isObject(d.encryptMessageInput))
+                    throw TypeError(".proto.LabyrinthWaCommand.encryptMessageInput: object expected");
+                m.encryptMessageInput = $root.proto.EncryptMessageInput.fromObject(d.encryptMessageInput, n + 1);
+            }
+            if (d.decryptMessageInput != null) {
+                if (!$util.isObject(d.decryptMessageInput))
+                    throw TypeError(".proto.LabyrinthWaCommand.decryptMessageInput: object expected");
+                m.decryptMessageInput = $root.proto.DecryptMessageInput.fromObject(d.decryptMessageInput, n + 1);
+            }
+            if (d.orfThreadIdInput != null) {
+                if (!$util.isObject(d.orfThreadIdInput))
+                    throw TypeError(".proto.LabyrinthWaCommand.orfThreadIdInput: object expected");
+                m.orfThreadIdInput = $root.proto.OrfThreadIdInput.fromObject(d.orfThreadIdInput, n + 1);
+            }
+            if (d.deriveMessageKeyInput != null) {
+                if (!$util.isObject(d.deriveMessageKeyInput))
+                    throw TypeError(".proto.LabyrinthWaCommand.deriveMessageKeyInput: object expected");
+                m.deriveMessageKeyInput = $root.proto.DeriveMessageKeyInput.fromObject(d.deriveMessageKeyInput, n + 1);
+            }
+            if (d.rotateEpochInput != null) {
+                if (!$util.isObject(d.rotateEpochInput))
+                    throw TypeError(".proto.LabyrinthWaCommand.rotateEpochInput: object expected");
+                m.rotateEpochInput = $root.proto.RotateEpochInput.fromObject(d.rotateEpochInput, n + 1);
+            }
+            return m;
+        };
+
+        LabyrinthWaCommand.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (m.createBackupInput != null && Object.hasOwnProperty.call(m, "createBackupInput")) {
+                d.createBackupInput = $root.proto.CreateBackupInput.toObject(m.createBackupInput, o, q + 1);
+                if (o.oneofs)
+                    d.commandInput = "createBackupInput";
+            }
+            if (m.encryptMessageInput != null && Object.hasOwnProperty.call(m, "encryptMessageInput")) {
+                d.encryptMessageInput = $root.proto.EncryptMessageInput.toObject(m.encryptMessageInput, o, q + 1);
+                if (o.oneofs)
+                    d.commandInput = "encryptMessageInput";
+            }
+            if (m.decryptMessageInput != null && Object.hasOwnProperty.call(m, "decryptMessageInput")) {
+                d.decryptMessageInput = $root.proto.DecryptMessageInput.toObject(m.decryptMessageInput, o, q + 1);
+                if (o.oneofs)
+                    d.commandInput = "decryptMessageInput";
+            }
+            if (m.orfThreadIdInput != null && Object.hasOwnProperty.call(m, "orfThreadIdInput")) {
+                d.orfThreadIdInput = $root.proto.OrfThreadIdInput.toObject(m.orfThreadIdInput, o, q + 1);
+                if (o.oneofs)
+                    d.commandInput = "orfThreadIdInput";
+            }
+            if (m.deriveMessageKeyInput != null && Object.hasOwnProperty.call(m, "deriveMessageKeyInput")) {
+                d.deriveMessageKeyInput = $root.proto.DeriveMessageKeyInput.toObject(m.deriveMessageKeyInput, o, q + 1);
+                if (o.oneofs)
+                    d.commandInput = "deriveMessageKeyInput";
+            }
+            if (m.rotateEpochInput != null && Object.hasOwnProperty.call(m, "rotateEpochInput")) {
+                d.rotateEpochInput = $root.proto.RotateEpochInput.toObject(m.rotateEpochInput, o, q + 1);
+                if (o.oneofs)
+                    d.commandInput = "rotateEpochInput";
+            }
+            return d;
+        };
+
+        LabyrinthWaCommand.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return LabyrinthWaCommand;
+    })();
+
     proto.LegacyMessage = (function() {
 
         function LegacyMessage(p) {
@@ -48352,12 +50995,6 @@ export const proto = $root.proto = (() => {
         };
 
         return Location;
-    })();
-
-    proto.MENTION_MENTION_TYPE = (function() {
-        const valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "PROFILE"] = 0;
-        return values;
     })();
 
     proto.MediaData = (function() {
@@ -50078,192 +52715,6 @@ export const proto = $root.proto = (() => {
         };
 
         return MemberLabel;
-    })();
-
-    proto.Mention = (function() {
-
-        function Mention(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null && ks[i] !== "__proto__")
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        Mention.prototype.mentionType = null;
-        Mention.prototype.mentionedJid = null;
-        Mention.prototype.offset = null;
-        Mention.prototype.length = null;
-
-        let $oneOfFields;
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(Mention.prototype, "_mentionType", {
-            get: $util.oneOfGetter($oneOfFields = ["mentionType"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(Mention.prototype, "_mentionedJid", {
-            get: $util.oneOfGetter($oneOfFields = ["mentionedJid"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(Mention.prototype, "_offset", {
-            get: $util.oneOfGetter($oneOfFields = ["offset"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(Mention.prototype, "_length", {
-            get: $util.oneOfGetter($oneOfFields = ["length"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        Mention.create = function create(properties) {
-            return new Mention(properties);
-        };
-
-        Mention.encode = function encode(m, w, q) {
-            if (!w)
-                w = $Writer.create();
-            if (q === undefined)
-                q = 0;
-            if (q > $util.recursionLimit)
-                throw Error("max depth exceeded");
-            if (m.mentionType != null && Object.hasOwnProperty.call(m, "mentionType"))
-                w.uint32(8).int32(m.mentionType);
-            if (m.mentionedJid != null && Object.hasOwnProperty.call(m, "mentionedJid"))
-                w.uint32(18).string(m.mentionedJid);
-            if (m.offset != null && Object.hasOwnProperty.call(m, "offset"))
-                w.uint32(24).uint32(m.offset);
-            if (m.length != null && Object.hasOwnProperty.call(m, "length"))
-                w.uint32(32).uint32(m.length);
-            return w;
-        };
-
-        Mention.decode = function decode(r, l, e, n) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            if (n === undefined)
-                n = 0;
-            if (n > $Reader.recursionLimit)
-                throw Error("maximum nesting depth exceeded");
-            var c, m;
-            if (l === undefined)
-                c = r.len;
-            else {
-                c = r.pos + l;
-                if (c > r.len)
-                    throw RangeError("index out of range");
-                l = r.len;
-                r.len = c;
-            }
-            m = new $root.proto.Mention();
-            while (r.pos < c) {
-                var t = r.uint32();
-                if (t === e)
-                    break;
-                switch (t >>> 3) {
-                case 1: {
-                        m.mentionType = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.mentionedJid = r.string();
-                        break;
-                    }
-                case 3: {
-                        m.offset = r.uint32();
-                        break;
-                    }
-                case 4: {
-                        m.length = r.uint32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7, n);
-                    break;
-                }
-            }
-            if (l !== undefined) {
-                if (r.pos !== c)
-                    throw RangeError("index out of range");
-                r.len = l;
-            }
-            return m;
-        };
-
-        Mention.fromObject = function fromObject(d, n) {
-            if (d instanceof $root.proto.Mention)
-                return d;
-            if (!$util.isObject(d))
-                throw TypeError(".proto.Mention: object expected");
-            if (n === undefined)
-                n = 0;
-            if (n > $util.recursionLimit)
-                throw Error("maximum nesting depth exceeded");
-            var m = new $root.proto.Mention();
-            switch (d.mentionType) {
-            default:
-                if (typeof d.mentionType === "number") {
-                    m.mentionType = d.mentionType;
-                    break;
-                }
-                break;
-            case "PROFILE":
-            case 0:
-                m.mentionType = 0;
-                break;
-            }
-            if (d.mentionedJid != null) {
-                m.mentionedJid = String(d.mentionedJid);
-            }
-            if (d.offset != null) {
-                m.offset = d.offset >>> 0;
-            }
-            if (d.length != null) {
-                m.length = d.length >>> 0;
-            }
-            return m;
-        };
-
-        Mention.toObject = function toObject(m, o, q) {
-            if (!o)
-                o = {};
-            if (q === undefined)
-                q = 0;
-            if (q > $util.recursionLimit)
-                throw Error("max depth exceeded");
-            var d = {};
-            if (m.mentionType != null && Object.hasOwnProperty.call(m, "mentionType")) {
-                d.mentionType = o.enums === String ? $root.proto.MENTION_MENTION_TYPE[m.mentionType] === undefined ? m.mentionType : $root.proto.MENTION_MENTION_TYPE[m.mentionType] : m.mentionType;
-                if (o.oneofs)
-                    d._mentionType = "mentionType";
-            }
-            if (m.mentionedJid != null && Object.hasOwnProperty.call(m, "mentionedJid")) {
-                d.mentionedJid = m.mentionedJid;
-                if (o.oneofs)
-                    d._mentionedJid = "mentionedJid";
-            }
-            if (m.offset != null && Object.hasOwnProperty.call(m, "offset")) {
-                d.offset = m.offset;
-                if (o.oneofs)
-                    d._offset = "offset";
-            }
-            if (m.length != null && Object.hasOwnProperty.call(m, "length")) {
-                d.length = m.length;
-                if (o.oneofs)
-                    d._length = "length";
-            }
-            return d;
-        };
-
-        Mention.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return Mention;
     })();
 
     proto.Message = (function() {
@@ -92785,207 +95236,6 @@ export const proto = $root.proto = (() => {
         return MessageSecretMessage;
     })();
 
-    proto.MessageText = (function() {
-
-        function MessageText(p) {
-            this.mentionedJid = [];
-            this.commands = [];
-            this.mentions = [];
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null && ks[i] !== "__proto__")
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        MessageText.prototype.text = null;
-        MessageText.prototype.mentionedJid = $util.emptyArray;
-        MessageText.prototype.commands = $util.emptyArray;
-        MessageText.prototype.mentions = $util.emptyArray;
-
-        let $oneOfFields;
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(MessageText.prototype, "_text", {
-            get: $util.oneOfGetter($oneOfFields = ["text"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        MessageText.create = function create(properties) {
-            return new MessageText(properties);
-        };
-
-        MessageText.encode = function encode(m, w, q) {
-            if (!w)
-                w = $Writer.create();
-            if (q === undefined)
-                q = 0;
-            if (q > $util.recursionLimit)
-                throw Error("max depth exceeded");
-            if (m.text != null && Object.hasOwnProperty.call(m, "text"))
-                w.uint32(10).string(m.text);
-            if (m.mentionedJid != null && m.mentionedJid.length) {
-                for (var i = 0; i < m.mentionedJid.length; ++i)
-                    w.uint32(18).string(m.mentionedJid[i]);
-            }
-            if (m.commands != null && m.commands.length) {
-                for (var i = 0; i < m.commands.length; ++i)
-                    $root.proto.Command.encode(m.commands[i], w.uint32(26).fork(), q + 1).ldelim();
-            }
-            if (m.mentions != null && m.mentions.length) {
-                for (var i = 0; i < m.mentions.length; ++i)
-                    $root.proto.Mention.encode(m.mentions[i], w.uint32(34).fork(), q + 1).ldelim();
-            }
-            return w;
-        };
-
-        MessageText.decode = function decode(r, l, e, n) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            if (n === undefined)
-                n = 0;
-            if (n > $Reader.recursionLimit)
-                throw Error("maximum nesting depth exceeded");
-            var c, m;
-            if (l === undefined)
-                c = r.len;
-            else {
-                c = r.pos + l;
-                if (c > r.len)
-                    throw RangeError("index out of range");
-                l = r.len;
-                r.len = c;
-            }
-            m = new $root.proto.MessageText();
-            while (r.pos < c) {
-                var t = r.uint32();
-                if (t === e)
-                    break;
-                switch (t >>> 3) {
-                case 1: {
-                        m.text = r.string();
-                        break;
-                    }
-                case 2: {
-                        if (!(m.mentionedJid && m.mentionedJid.length))
-                            m.mentionedJid = [];
-                        m.mentionedJid.push(r.string());
-                        break;
-                    }
-                case 3: {
-                        if (!(m.commands && m.commands.length))
-                            m.commands = [];
-                        m.commands.push($root.proto.Command.decode(r, r.uint32(), undefined, n + 1));
-                        break;
-                    }
-                case 4: {
-                        if (!(m.mentions && m.mentions.length))
-                            m.mentions = [];
-                        m.mentions.push($root.proto.Mention.decode(r, r.uint32(), undefined, n + 1));
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7, n);
-                    break;
-                }
-            }
-            if (l !== undefined) {
-                if (r.pos !== c)
-                    throw RangeError("index out of range");
-                r.len = l;
-            }
-            return m;
-        };
-
-        MessageText.fromObject = function fromObject(d, n) {
-            if (d instanceof $root.proto.MessageText)
-                return d;
-            if (!$util.isObject(d))
-                throw TypeError(".proto.MessageText: object expected");
-            if (n === undefined)
-                n = 0;
-            if (n > $util.recursionLimit)
-                throw Error("maximum nesting depth exceeded");
-            var m = new $root.proto.MessageText();
-            if (d.text != null) {
-                m.text = String(d.text);
-            }
-            if (d.mentionedJid) {
-                if (!Array.isArray(d.mentionedJid))
-                    throw TypeError(".proto.MessageText.mentionedJid: array expected");
-                m.mentionedJid = [];
-                for (var i = 0; i < d.mentionedJid.length; ++i) {
-                    m.mentionedJid[i] = String(d.mentionedJid[i]);
-                }
-            }
-            if (d.commands) {
-                if (!Array.isArray(d.commands))
-                    throw TypeError(".proto.MessageText.commands: array expected");
-                m.commands = [];
-                for (var i = 0; i < d.commands.length; ++i) {
-                    if (!$util.isObject(d.commands[i]))
-                        throw TypeError(".proto.MessageText.commands: object expected");
-                    m.commands[i] = $root.proto.Command.fromObject(d.commands[i], n + 1);
-                }
-            }
-            if (d.mentions) {
-                if (!Array.isArray(d.mentions))
-                    throw TypeError(".proto.MessageText.mentions: array expected");
-                m.mentions = [];
-                for (var i = 0; i < d.mentions.length; ++i) {
-                    if (!$util.isObject(d.mentions[i]))
-                        throw TypeError(".proto.MessageText.mentions: object expected");
-                    m.mentions[i] = $root.proto.Mention.fromObject(d.mentions[i], n + 1);
-                }
-            }
-            return m;
-        };
-
-        MessageText.toObject = function toObject(m, o, q) {
-            if (!o)
-                o = {};
-            if (q === undefined)
-                q = 0;
-            if (q > $util.recursionLimit)
-                throw Error("max depth exceeded");
-            var d = {};
-            if (o.arrays || o.defaults) {
-                d.mentionedJid = [];
-                d.commands = [];
-                d.mentions = [];
-            }
-            if (m.text != null && Object.hasOwnProperty.call(m, "text")) {
-                d.text = m.text;
-                if (o.oneofs)
-                    d._text = "text";
-            }
-            if (m.mentionedJid && m.mentionedJid.length) {
-                d.mentionedJid = [];
-                for (var j = 0; j < m.mentionedJid.length; ++j) {
-                    d.mentionedJid[j] = m.mentionedJid[j];
-                }
-            }
-            if (m.commands && m.commands.length) {
-                d.commands = [];
-                for (var j = 0; j < m.commands.length; ++j) {
-                    d.commands[j] = $root.proto.Command.toObject(m.commands[j], o, q + 1);
-                }
-            }
-            if (m.mentions && m.mentions.length) {
-                d.mentions = [];
-                for (var j = 0; j < m.mentions.length; ++j) {
-                    d.mentions[j] = $root.proto.Mention.toObject(m.mentions[j], o, q + 1);
-                }
-            }
-            return d;
-        };
-
-        MessageText.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return MessageText;
-    })();
-
     proto.Money = (function() {
 
         function Money(p) {
@@ -96318,6 +98568,276 @@ export const proto = $root.proto = (() => {
         };
 
         return NotificationSettings;
+    })();
+
+    proto.OrfThreadIdInput = (function() {
+
+        function OrfThreadIdInput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        OrfThreadIdInput.prototype.orfClientState = $util.newBuffer([]);
+        OrfThreadIdInput.prototype.threadId = "";
+
+        OrfThreadIdInput.create = function create(properties) {
+            return new OrfThreadIdInput(properties);
+        };
+
+        OrfThreadIdInput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(10).bytes(m.orfClientState);
+            w.uint32(18).string(m.threadId);
+            return w;
+        };
+
+        OrfThreadIdInput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.OrfThreadIdInput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.orfClientState = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.threadId = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "orfClientState"))
+                throw $util.ProtocolError("missing required 'orfClientState'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "threadId"))
+                throw $util.ProtocolError("missing required 'threadId'", { instance: m });
+            return m;
+        };
+
+        OrfThreadIdInput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.OrfThreadIdInput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.OrfThreadIdInput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.OrfThreadIdInput();
+            if (d.orfClientState != null) {
+                if (typeof d.orfClientState === "string")
+                    $util.base64.decode(d.orfClientState, m.orfClientState = $util.newBuffer($util.base64.length(d.orfClientState)), 0);
+                else if (d.orfClientState.length >= 0)
+                    m.orfClientState = d.orfClientState;
+            }
+            if (d.threadId != null) {
+                m.threadId = String(d.threadId);
+            }
+            return m;
+        };
+
+        OrfThreadIdInput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.defaults) {
+                if (o.bytes === String)
+                    d.orfClientState = "";
+                else {
+                    d.orfClientState = [];
+                    if (o.bytes !== Array)
+                        d.orfClientState = $util.newBuffer(d.orfClientState);
+                }
+                d.threadId = "";
+            }
+            if (m.orfClientState != null && Object.hasOwnProperty.call(m, "orfClientState")) {
+                d.orfClientState = o.bytes === String ? $util.base64.encode(m.orfClientState, 0, m.orfClientState.length) : o.bytes === Array ? Array.prototype.slice.call(m.orfClientState) : m.orfClientState;
+            }
+            if (m.threadId != null && Object.hasOwnProperty.call(m, "threadId")) {
+                d.threadId = m.threadId;
+            }
+            return d;
+        };
+
+        OrfThreadIdInput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return OrfThreadIdInput;
+    })();
+
+    proto.OrfThreadIdOutput = (function() {
+
+        function OrfThreadIdOutput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        OrfThreadIdOutput.prototype.orfThreadId = null;
+        OrfThreadIdOutput.prototype.error = null;
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(OrfThreadIdOutput.prototype, "_orfThreadId", {
+            get: $util.oneOfGetter($oneOfFields = ["orfThreadId"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(OrfThreadIdOutput.prototype, "_error", {
+            get: $util.oneOfGetter($oneOfFields = ["error"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        OrfThreadIdOutput.create = function create(properties) {
+            return new OrfThreadIdOutput(properties);
+        };
+
+        OrfThreadIdOutput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            if (m.orfThreadId != null && Object.hasOwnProperty.call(m, "orfThreadId"))
+                w.uint32(10).bytes(m.orfThreadId);
+            if (m.error != null && Object.hasOwnProperty.call(m, "error"))
+                w.uint32(18).string(m.error);
+            return w;
+        };
+
+        OrfThreadIdOutput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.OrfThreadIdOutput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.orfThreadId = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.error = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            return m;
+        };
+
+        OrfThreadIdOutput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.OrfThreadIdOutput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.OrfThreadIdOutput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.OrfThreadIdOutput();
+            if (d.orfThreadId != null) {
+                if (typeof d.orfThreadId === "string")
+                    $util.base64.decode(d.orfThreadId, m.orfThreadId = $util.newBuffer($util.base64.length(d.orfThreadId)), 0);
+                else if (d.orfThreadId.length >= 0)
+                    m.orfThreadId = d.orfThreadId;
+            }
+            if (d.error != null) {
+                m.error = String(d.error);
+            }
+            return m;
+        };
+
+        OrfThreadIdOutput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (m.orfThreadId != null && Object.hasOwnProperty.call(m, "orfThreadId")) {
+                d.orfThreadId = o.bytes === String ? $util.base64.encode(m.orfThreadId, 0, m.orfThreadId.length) : o.bytes === Array ? Array.prototype.slice.call(m.orfThreadId) : m.orfThreadId;
+                if (o.oneofs)
+                    d._orfThreadId = "orfThreadId";
+            }
+            if (m.error != null && Object.hasOwnProperty.call(m, "error")) {
+                d.error = m.error;
+                if (o.oneofs)
+                    d._error = "error";
+            }
+            return d;
+        };
+
+        OrfThreadIdOutput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return OrfThreadIdOutput;
     })();
 
     proto.PairingRequest = (function() {
@@ -102724,6 +105244,885 @@ export const proto = $root.proto = (() => {
         return ReportingTokenInfo;
     })();
 
+    proto.RotateEpochInput = (function() {
+
+        function RotateEpochInput(p) {
+            this.members = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        RotateEpochInput.prototype.currentEpochRootKey = $util.newBuffer([]);
+        RotateEpochInput.prototype.currentEpochAnonId = $util.newBuffer([]);
+        RotateEpochInput.prototype.currentEpochFbid = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        RotateEpochInput.prototype.epochStoragePrivateKey = $util.newBuffer([]);
+        RotateEpochInput.prototype.members = $util.emptyArray;
+
+        RotateEpochInput.create = function create(properties) {
+            return new RotateEpochInput(properties);
+        };
+
+        RotateEpochInput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(10).bytes(m.currentEpochRootKey);
+            w.uint32(18).bytes(m.currentEpochAnonId);
+            w.uint32(24).uint64(m.currentEpochFbid);
+            w.uint32(34).bytes(m.epochStoragePrivateKey);
+            if (m.members != null && m.members.length) {
+                for (var i = 0; i < m.members.length; ++i)
+                    $root.proto.RotateEpochMemberInput.encode(m.members[i], w.uint32(42).fork(), q + 1).ldelim();
+            }
+            return w;
+        };
+
+        RotateEpochInput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.RotateEpochInput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.currentEpochRootKey = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.currentEpochAnonId = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.currentEpochFbid = r.uint64();
+                        break;
+                    }
+                case 4: {
+                        m.epochStoragePrivateKey = r.bytes();
+                        break;
+                    }
+                case 5: {
+                        if (!(m.members && m.members.length))
+                            m.members = [];
+                        m.members.push($root.proto.RotateEpochMemberInput.decode(r, r.uint32(), undefined, n + 1));
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "currentEpochRootKey"))
+                throw $util.ProtocolError("missing required 'currentEpochRootKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "currentEpochAnonId"))
+                throw $util.ProtocolError("missing required 'currentEpochAnonId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "currentEpochFbid"))
+                throw $util.ProtocolError("missing required 'currentEpochFbid'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochStoragePrivateKey"))
+                throw $util.ProtocolError("missing required 'epochStoragePrivateKey'", { instance: m });
+            return m;
+        };
+
+        RotateEpochInput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.RotateEpochInput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.RotateEpochInput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.RotateEpochInput();
+            if (d.currentEpochRootKey != null) {
+                if (typeof d.currentEpochRootKey === "string")
+                    $util.base64.decode(d.currentEpochRootKey, m.currentEpochRootKey = $util.newBuffer($util.base64.length(d.currentEpochRootKey)), 0);
+                else if (d.currentEpochRootKey.length >= 0)
+                    m.currentEpochRootKey = d.currentEpochRootKey;
+            }
+            if (d.currentEpochAnonId != null) {
+                if (typeof d.currentEpochAnonId === "string")
+                    $util.base64.decode(d.currentEpochAnonId, m.currentEpochAnonId = $util.newBuffer($util.base64.length(d.currentEpochAnonId)), 0);
+                else if (d.currentEpochAnonId.length >= 0)
+                    m.currentEpochAnonId = d.currentEpochAnonId;
+            }
+            if (d.currentEpochFbid != null) {
+                if ($util.Long)
+                    m.currentEpochFbid = $util.Long.fromValue(d.currentEpochFbid, true);
+                else if (typeof d.currentEpochFbid === "string")
+                    m.currentEpochFbid = parseInt(d.currentEpochFbid, 10);
+                else if (typeof d.currentEpochFbid === "number")
+                    m.currentEpochFbid = d.currentEpochFbid;
+                else if (typeof d.currentEpochFbid === "object")
+                    m.currentEpochFbid = new $util.LongBits(d.currentEpochFbid.low >>> 0, d.currentEpochFbid.high >>> 0).toNumber(true);
+            }
+            if (d.epochStoragePrivateKey != null) {
+                if (typeof d.epochStoragePrivateKey === "string")
+                    $util.base64.decode(d.epochStoragePrivateKey, m.epochStoragePrivateKey = $util.newBuffer($util.base64.length(d.epochStoragePrivateKey)), 0);
+                else if (d.epochStoragePrivateKey.length >= 0)
+                    m.epochStoragePrivateKey = d.epochStoragePrivateKey;
+            }
+            if (d.members) {
+                if (!Array.isArray(d.members))
+                    throw TypeError(".proto.RotateEpochInput.members: array expected");
+                m.members = [];
+                for (var i = 0; i < d.members.length; ++i) {
+                    if (!$util.isObject(d.members[i]))
+                        throw TypeError(".proto.RotateEpochInput.members: object expected");
+                    m.members[i] = $root.proto.RotateEpochMemberInput.fromObject(d.members[i], n + 1);
+                }
+            }
+            return m;
+        };
+
+        RotateEpochInput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.members = [];
+            }
+            if (o.defaults) {
+                if (o.bytes === String)
+                    d.currentEpochRootKey = "";
+                else {
+                    d.currentEpochRootKey = [];
+                    if (o.bytes !== Array)
+                        d.currentEpochRootKey = $util.newBuffer(d.currentEpochRootKey);
+                }
+                if (o.bytes === String)
+                    d.currentEpochAnonId = "";
+                else {
+                    d.currentEpochAnonId = [];
+                    if (o.bytes !== Array)
+                        d.currentEpochAnonId = $util.newBuffer(d.currentEpochAnonId);
+                }
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, true);
+                    d.currentEpochFbid = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : typeof BigInt !== "undefined" && o.longs === BigInt ? n.toBigInt() : n;
+                } else
+                    d.currentEpochFbid = o.longs === String ? "0" : typeof BigInt !== "undefined" && o.longs === BigInt ? BigInt("0") : 0;
+                if (o.bytes === String)
+                    d.epochStoragePrivateKey = "";
+                else {
+                    d.epochStoragePrivateKey = [];
+                    if (o.bytes !== Array)
+                        d.epochStoragePrivateKey = $util.newBuffer(d.epochStoragePrivateKey);
+                }
+            }
+            if (m.currentEpochRootKey != null && Object.hasOwnProperty.call(m, "currentEpochRootKey")) {
+                d.currentEpochRootKey = o.bytes === String ? $util.base64.encode(m.currentEpochRootKey, 0, m.currentEpochRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.currentEpochRootKey) : m.currentEpochRootKey;
+            }
+            if (m.currentEpochAnonId != null && Object.hasOwnProperty.call(m, "currentEpochAnonId")) {
+                d.currentEpochAnonId = o.bytes === String ? $util.base64.encode(m.currentEpochAnonId, 0, m.currentEpochAnonId.length) : o.bytes === Array ? Array.prototype.slice.call(m.currentEpochAnonId) : m.currentEpochAnonId;
+            }
+            if (m.currentEpochFbid != null && Object.hasOwnProperty.call(m, "currentEpochFbid")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.currentEpochFbid = typeof m.currentEpochFbid === "number" ? BigInt(m.currentEpochFbid) : $util.Long.fromBits(m.currentEpochFbid.low >>> 0, m.currentEpochFbid.high >>> 0, true).toBigInt();
+                else if (typeof m.currentEpochFbid === "number")
+                    d.currentEpochFbid = o.longs === String ? String(m.currentEpochFbid) : m.currentEpochFbid;
+                else
+                    d.currentEpochFbid = o.longs === String ? longToString(m.currentEpochFbid, true) : o.longs === Number ? longToNumber(m.currentEpochFbid, true) : m.currentEpochFbid;
+            }
+            if (m.epochStoragePrivateKey != null && Object.hasOwnProperty.call(m, "epochStoragePrivateKey")) {
+                d.epochStoragePrivateKey = o.bytes === String ? $util.base64.encode(m.epochStoragePrivateKey, 0, m.epochStoragePrivateKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochStoragePrivateKey) : m.epochStoragePrivateKey;
+            }
+            if (m.members && m.members.length) {
+                d.members = [];
+                for (var j = 0; j < m.members.length; ++j) {
+                    d.members[j] = $root.proto.RotateEpochMemberInput.toObject(m.members[j], o, q + 1);
+                }
+            }
+            return d;
+        };
+
+        RotateEpochInput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RotateEpochInput;
+    })();
+
+    proto.RotateEpochMemberEdge = (function() {
+
+        function RotateEpochMemberEdge(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        RotateEpochMemberEdge.prototype.deviceId = null;
+        RotateEpochMemberEdge.prototype.encryptedEpochKey = null;
+        RotateEpochMemberEdge.prototype.deviceEpochHmac = null;
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochMemberEdge.prototype, "_deviceId", {
+            get: $util.oneOfGetter($oneOfFields = ["deviceId"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochMemberEdge.prototype, "_encryptedEpochKey", {
+            get: $util.oneOfGetter($oneOfFields = ["encryptedEpochKey"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochMemberEdge.prototype, "_deviceEpochHmac", {
+            get: $util.oneOfGetter($oneOfFields = ["deviceEpochHmac"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        RotateEpochMemberEdge.create = function create(properties) {
+            return new RotateEpochMemberEdge(properties);
+        };
+
+        RotateEpochMemberEdge.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            if (m.deviceId != null && Object.hasOwnProperty.call(m, "deviceId"))
+                w.uint32(8).uint64(m.deviceId);
+            if (m.encryptedEpochKey != null && Object.hasOwnProperty.call(m, "encryptedEpochKey"))
+                w.uint32(18).bytes(m.encryptedEpochKey);
+            if (m.deviceEpochHmac != null && Object.hasOwnProperty.call(m, "deviceEpochHmac"))
+                w.uint32(26).bytes(m.deviceEpochHmac);
+            return w;
+        };
+
+        RotateEpochMemberEdge.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.RotateEpochMemberEdge();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.deviceId = r.uint64();
+                        break;
+                    }
+                case 2: {
+                        m.encryptedEpochKey = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.deviceEpochHmac = r.bytes();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            return m;
+        };
+
+        RotateEpochMemberEdge.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.RotateEpochMemberEdge)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.RotateEpochMemberEdge: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.RotateEpochMemberEdge();
+            if (d.deviceId != null) {
+                if ($util.Long)
+                    m.deviceId = $util.Long.fromValue(d.deviceId, true);
+                else if (typeof d.deviceId === "string")
+                    m.deviceId = parseInt(d.deviceId, 10);
+                else if (typeof d.deviceId === "number")
+                    m.deviceId = d.deviceId;
+                else if (typeof d.deviceId === "object")
+                    m.deviceId = new $util.LongBits(d.deviceId.low >>> 0, d.deviceId.high >>> 0).toNumber(true);
+            }
+            if (d.encryptedEpochKey != null) {
+                if (typeof d.encryptedEpochKey === "string")
+                    $util.base64.decode(d.encryptedEpochKey, m.encryptedEpochKey = $util.newBuffer($util.base64.length(d.encryptedEpochKey)), 0);
+                else if (d.encryptedEpochKey.length >= 0)
+                    m.encryptedEpochKey = d.encryptedEpochKey;
+            }
+            if (d.deviceEpochHmac != null) {
+                if (typeof d.deviceEpochHmac === "string")
+                    $util.base64.decode(d.deviceEpochHmac, m.deviceEpochHmac = $util.newBuffer($util.base64.length(d.deviceEpochHmac)), 0);
+                else if (d.deviceEpochHmac.length >= 0)
+                    m.deviceEpochHmac = d.deviceEpochHmac;
+            }
+            return m;
+        };
+
+        RotateEpochMemberEdge.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (m.deviceId != null && Object.hasOwnProperty.call(m, "deviceId")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.deviceId = typeof m.deviceId === "number" ? BigInt(m.deviceId) : $util.Long.fromBits(m.deviceId.low >>> 0, m.deviceId.high >>> 0, true).toBigInt();
+                else if (typeof m.deviceId === "number")
+                    d.deviceId = o.longs === String ? String(m.deviceId) : m.deviceId;
+                else
+                    d.deviceId = o.longs === String ? longToString(m.deviceId, true) : o.longs === Number ? longToNumber(m.deviceId, true) : m.deviceId;
+                if (o.oneofs)
+                    d._deviceId = "deviceId";
+            }
+            if (m.encryptedEpochKey != null && Object.hasOwnProperty.call(m, "encryptedEpochKey")) {
+                d.encryptedEpochKey = o.bytes === String ? $util.base64.encode(m.encryptedEpochKey, 0, m.encryptedEpochKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.encryptedEpochKey) : m.encryptedEpochKey;
+                if (o.oneofs)
+                    d._encryptedEpochKey = "encryptedEpochKey";
+            }
+            if (m.deviceEpochHmac != null && Object.hasOwnProperty.call(m, "deviceEpochHmac")) {
+                d.deviceEpochHmac = o.bytes === String ? $util.base64.encode(m.deviceEpochHmac, 0, m.deviceEpochHmac.length) : o.bytes === Array ? Array.prototype.slice.call(m.deviceEpochHmac) : m.deviceEpochHmac;
+                if (o.oneofs)
+                    d._deviceEpochHmac = "deviceEpochHmac";
+            }
+            return d;
+        };
+
+        RotateEpochMemberEdge.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RotateEpochMemberEdge;
+    })();
+
+    proto.RotateEpochMemberInput = (function() {
+
+        function RotateEpochMemberInput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        RotateEpochMemberInput.prototype.deviceId = $util.Long ? $util.Long.fromBits(0,0,true) : 0;
+        RotateEpochMemberInput.prototype.epochStoragePublicKey = $util.newBuffer([]);
+        RotateEpochMemberInput.prototype.devicePublicKey = $util.newBuffer([]);
+
+        RotateEpochMemberInput.create = function create(properties) {
+            return new RotateEpochMemberInput(properties);
+        };
+
+        RotateEpochMemberInput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(8).uint64(m.deviceId);
+            w.uint32(18).bytes(m.epochStoragePublicKey);
+            w.uint32(26).bytes(m.devicePublicKey);
+            return w;
+        };
+
+        RotateEpochMemberInput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.RotateEpochMemberInput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.deviceId = r.uint64();
+                        break;
+                    }
+                case 2: {
+                        m.epochStoragePublicKey = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.devicePublicKey = r.bytes();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "deviceId"))
+                throw $util.ProtocolError("missing required 'deviceId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "epochStoragePublicKey"))
+                throw $util.ProtocolError("missing required 'epochStoragePublicKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "devicePublicKey"))
+                throw $util.ProtocolError("missing required 'devicePublicKey'", { instance: m });
+            return m;
+        };
+
+        RotateEpochMemberInput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.RotateEpochMemberInput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.RotateEpochMemberInput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.RotateEpochMemberInput();
+            if (d.deviceId != null) {
+                if ($util.Long)
+                    m.deviceId = $util.Long.fromValue(d.deviceId, true);
+                else if (typeof d.deviceId === "string")
+                    m.deviceId = parseInt(d.deviceId, 10);
+                else if (typeof d.deviceId === "number")
+                    m.deviceId = d.deviceId;
+                else if (typeof d.deviceId === "object")
+                    m.deviceId = new $util.LongBits(d.deviceId.low >>> 0, d.deviceId.high >>> 0).toNumber(true);
+            }
+            if (d.epochStoragePublicKey != null) {
+                if (typeof d.epochStoragePublicKey === "string")
+                    $util.base64.decode(d.epochStoragePublicKey, m.epochStoragePublicKey = $util.newBuffer($util.base64.length(d.epochStoragePublicKey)), 0);
+                else if (d.epochStoragePublicKey.length >= 0)
+                    m.epochStoragePublicKey = d.epochStoragePublicKey;
+            }
+            if (d.devicePublicKey != null) {
+                if (typeof d.devicePublicKey === "string")
+                    $util.base64.decode(d.devicePublicKey, m.devicePublicKey = $util.newBuffer($util.base64.length(d.devicePublicKey)), 0);
+                else if (d.devicePublicKey.length >= 0)
+                    m.devicePublicKey = d.devicePublicKey;
+            }
+            return m;
+        };
+
+        RotateEpochMemberInput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.defaults) {
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, true);
+                    d.deviceId = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : typeof BigInt !== "undefined" && o.longs === BigInt ? n.toBigInt() : n;
+                } else
+                    d.deviceId = o.longs === String ? "0" : typeof BigInt !== "undefined" && o.longs === BigInt ? BigInt("0") : 0;
+                if (o.bytes === String)
+                    d.epochStoragePublicKey = "";
+                else {
+                    d.epochStoragePublicKey = [];
+                    if (o.bytes !== Array)
+                        d.epochStoragePublicKey = $util.newBuffer(d.epochStoragePublicKey);
+                }
+                if (o.bytes === String)
+                    d.devicePublicKey = "";
+                else {
+                    d.devicePublicKey = [];
+                    if (o.bytes !== Array)
+                        d.devicePublicKey = $util.newBuffer(d.devicePublicKey);
+                }
+            }
+            if (m.deviceId != null && Object.hasOwnProperty.call(m, "deviceId")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.deviceId = typeof m.deviceId === "number" ? BigInt(m.deviceId) : $util.Long.fromBits(m.deviceId.low >>> 0, m.deviceId.high >>> 0, true).toBigInt();
+                else if (typeof m.deviceId === "number")
+                    d.deviceId = o.longs === String ? String(m.deviceId) : m.deviceId;
+                else
+                    d.deviceId = o.longs === String ? longToString(m.deviceId, true) : o.longs === Number ? longToNumber(m.deviceId, true) : m.deviceId;
+            }
+            if (m.epochStoragePublicKey != null && Object.hasOwnProperty.call(m, "epochStoragePublicKey")) {
+                d.epochStoragePublicKey = o.bytes === String ? $util.base64.encode(m.epochStoragePublicKey, 0, m.epochStoragePublicKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochStoragePublicKey) : m.epochStoragePublicKey;
+            }
+            if (m.devicePublicKey != null && Object.hasOwnProperty.call(m, "devicePublicKey")) {
+                d.devicePublicKey = o.bytes === String ? $util.base64.encode(m.devicePublicKey, 0, m.devicePublicKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.devicePublicKey) : m.devicePublicKey;
+            }
+            return d;
+        };
+
+        RotateEpochMemberInput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RotateEpochMemberInput;
+    })();
+
+    proto.RotateEpochOutput = (function() {
+
+        function RotateEpochOutput(p) {
+            this.memberEdges = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        RotateEpochOutput.prototype.newEpochRootKey = null;
+        RotateEpochOutput.prototype.newEpochAnonId = null;
+        RotateEpochOutput.prototype.newEpochFbid = null;
+        RotateEpochOutput.prototype.epochAnonId = null;
+        RotateEpochOutput.prototype.backwardEdge = null;
+        RotateEpochOutput.prototype.memberEdges = $util.emptyArray;
+        RotateEpochOutput.prototype.epochRootKeyFingerprint = null;
+        RotateEpochOutput.prototype.error = null;
+
+        let $oneOfFields;
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochOutput.prototype, "_newEpochRootKey", {
+            get: $util.oneOfGetter($oneOfFields = ["newEpochRootKey"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochOutput.prototype, "_newEpochAnonId", {
+            get: $util.oneOfGetter($oneOfFields = ["newEpochAnonId"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochOutput.prototype, "_newEpochFbid", {
+            get: $util.oneOfGetter($oneOfFields = ["newEpochFbid"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochOutput.prototype, "_epochAnonId", {
+            get: $util.oneOfGetter($oneOfFields = ["epochAnonId"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochOutput.prototype, "_backwardEdge", {
+            get: $util.oneOfGetter($oneOfFields = ["backwardEdge"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochOutput.prototype, "_epochRootKeyFingerprint", {
+            get: $util.oneOfGetter($oneOfFields = ["epochRootKeyFingerprint"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        // Virtual OneOf for proto3 optional field
+        Object.defineProperty(RotateEpochOutput.prototype, "_error", {
+            get: $util.oneOfGetter($oneOfFields = ["error"]),
+            set: $util.oneOfSetter($oneOfFields)
+        });
+
+        RotateEpochOutput.create = function create(properties) {
+            return new RotateEpochOutput(properties);
+        };
+
+        RotateEpochOutput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            if (m.newEpochRootKey != null && Object.hasOwnProperty.call(m, "newEpochRootKey"))
+                w.uint32(10).bytes(m.newEpochRootKey);
+            if (m.newEpochAnonId != null && Object.hasOwnProperty.call(m, "newEpochAnonId"))
+                w.uint32(16).uint64(m.newEpochAnonId);
+            if (m.epochAnonId != null && Object.hasOwnProperty.call(m, "epochAnonId"))
+                w.uint32(26).bytes(m.epochAnonId);
+            if (m.backwardEdge != null && Object.hasOwnProperty.call(m, "backwardEdge"))
+                $root.proto.BackwardEdge.encode(m.backwardEdge, w.uint32(34).fork(), q + 1).ldelim();
+            if (m.memberEdges != null && m.memberEdges.length) {
+                for (var i = 0; i < m.memberEdges.length; ++i)
+                    $root.proto.RotateEpochMemberEdge.encode(m.memberEdges[i], w.uint32(42).fork(), q + 1).ldelim();
+            }
+            if (m.epochRootKeyFingerprint != null && Object.hasOwnProperty.call(m, "epochRootKeyFingerprint"))
+                w.uint32(50).bytes(m.epochRootKeyFingerprint);
+            if (m.error != null && Object.hasOwnProperty.call(m, "error"))
+                w.uint32(58).string(m.error);
+            if (m.newEpochFbid != null && Object.hasOwnProperty.call(m, "newEpochFbid"))
+                w.uint32(64).uint64(m.newEpochFbid);
+            return w;
+        };
+
+        RotateEpochOutput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.RotateEpochOutput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.newEpochRootKey = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.newEpochAnonId = r.uint64();
+                        break;
+                    }
+                case 8: {
+                        m.newEpochFbid = r.uint64();
+                        break;
+                    }
+                case 3: {
+                        m.epochAnonId = r.bytes();
+                        break;
+                    }
+                case 4: {
+                        m.backwardEdge = $root.proto.BackwardEdge.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                case 5: {
+                        if (!(m.memberEdges && m.memberEdges.length))
+                            m.memberEdges = [];
+                        m.memberEdges.push($root.proto.RotateEpochMemberEdge.decode(r, r.uint32(), undefined, n + 1));
+                        break;
+                    }
+                case 6: {
+                        m.epochRootKeyFingerprint = r.bytes();
+                        break;
+                    }
+                case 7: {
+                        m.error = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            return m;
+        };
+
+        RotateEpochOutput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.RotateEpochOutput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.RotateEpochOutput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.RotateEpochOutput();
+            if (d.newEpochRootKey != null) {
+                if (typeof d.newEpochRootKey === "string")
+                    $util.base64.decode(d.newEpochRootKey, m.newEpochRootKey = $util.newBuffer($util.base64.length(d.newEpochRootKey)), 0);
+                else if (d.newEpochRootKey.length >= 0)
+                    m.newEpochRootKey = d.newEpochRootKey;
+            }
+            if (d.newEpochAnonId != null) {
+                if ($util.Long)
+                    m.newEpochAnonId = $util.Long.fromValue(d.newEpochAnonId, true);
+                else if (typeof d.newEpochAnonId === "string")
+                    m.newEpochAnonId = parseInt(d.newEpochAnonId, 10);
+                else if (typeof d.newEpochAnonId === "number")
+                    m.newEpochAnonId = d.newEpochAnonId;
+                else if (typeof d.newEpochAnonId === "object")
+                    m.newEpochAnonId = new $util.LongBits(d.newEpochAnonId.low >>> 0, d.newEpochAnonId.high >>> 0).toNumber(true);
+            }
+            if (d.newEpochFbid != null) {
+                if ($util.Long)
+                    m.newEpochFbid = $util.Long.fromValue(d.newEpochFbid, true);
+                else if (typeof d.newEpochFbid === "string")
+                    m.newEpochFbid = parseInt(d.newEpochFbid, 10);
+                else if (typeof d.newEpochFbid === "number")
+                    m.newEpochFbid = d.newEpochFbid;
+                else if (typeof d.newEpochFbid === "object")
+                    m.newEpochFbid = new $util.LongBits(d.newEpochFbid.low >>> 0, d.newEpochFbid.high >>> 0).toNumber(true);
+            }
+            if (d.epochAnonId != null) {
+                if (typeof d.epochAnonId === "string")
+                    $util.base64.decode(d.epochAnonId, m.epochAnonId = $util.newBuffer($util.base64.length(d.epochAnonId)), 0);
+                else if (d.epochAnonId.length >= 0)
+                    m.epochAnonId = d.epochAnonId;
+            }
+            if (d.backwardEdge != null) {
+                if (!$util.isObject(d.backwardEdge))
+                    throw TypeError(".proto.RotateEpochOutput.backwardEdge: object expected");
+                m.backwardEdge = $root.proto.BackwardEdge.fromObject(d.backwardEdge, n + 1);
+            }
+            if (d.memberEdges) {
+                if (!Array.isArray(d.memberEdges))
+                    throw TypeError(".proto.RotateEpochOutput.memberEdges: array expected");
+                m.memberEdges = [];
+                for (var i = 0; i < d.memberEdges.length; ++i) {
+                    if (!$util.isObject(d.memberEdges[i]))
+                        throw TypeError(".proto.RotateEpochOutput.memberEdges: object expected");
+                    m.memberEdges[i] = $root.proto.RotateEpochMemberEdge.fromObject(d.memberEdges[i], n + 1);
+                }
+            }
+            if (d.epochRootKeyFingerprint != null) {
+                if (typeof d.epochRootKeyFingerprint === "string")
+                    $util.base64.decode(d.epochRootKeyFingerprint, m.epochRootKeyFingerprint = $util.newBuffer($util.base64.length(d.epochRootKeyFingerprint)), 0);
+                else if (d.epochRootKeyFingerprint.length >= 0)
+                    m.epochRootKeyFingerprint = d.epochRootKeyFingerprint;
+            }
+            if (d.error != null) {
+                m.error = String(d.error);
+            }
+            return m;
+        };
+
+        RotateEpochOutput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.memberEdges = [];
+            }
+            if (m.newEpochRootKey != null && Object.hasOwnProperty.call(m, "newEpochRootKey")) {
+                d.newEpochRootKey = o.bytes === String ? $util.base64.encode(m.newEpochRootKey, 0, m.newEpochRootKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.newEpochRootKey) : m.newEpochRootKey;
+                if (o.oneofs)
+                    d._newEpochRootKey = "newEpochRootKey";
+            }
+            if (m.newEpochAnonId != null && Object.hasOwnProperty.call(m, "newEpochAnonId")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.newEpochAnonId = typeof m.newEpochAnonId === "number" ? BigInt(m.newEpochAnonId) : $util.Long.fromBits(m.newEpochAnonId.low >>> 0, m.newEpochAnonId.high >>> 0, true).toBigInt();
+                else if (typeof m.newEpochAnonId === "number")
+                    d.newEpochAnonId = o.longs === String ? String(m.newEpochAnonId) : m.newEpochAnonId;
+                else
+                    d.newEpochAnonId = o.longs === String ? longToString(m.newEpochAnonId, true) : o.longs === Number ? longToNumber(m.newEpochAnonId, true) : m.newEpochAnonId;
+                if (o.oneofs)
+                    d._newEpochAnonId = "newEpochAnonId";
+            }
+            if (m.epochAnonId != null && Object.hasOwnProperty.call(m, "epochAnonId")) {
+                d.epochAnonId = o.bytes === String ? $util.base64.encode(m.epochAnonId, 0, m.epochAnonId.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochAnonId) : m.epochAnonId;
+                if (o.oneofs)
+                    d._epochAnonId = "epochAnonId";
+            }
+            if (m.backwardEdge != null && Object.hasOwnProperty.call(m, "backwardEdge")) {
+                d.backwardEdge = $root.proto.BackwardEdge.toObject(m.backwardEdge, o, q + 1);
+                if (o.oneofs)
+                    d._backwardEdge = "backwardEdge";
+            }
+            if (m.memberEdges && m.memberEdges.length) {
+                d.memberEdges = [];
+                for (var j = 0; j < m.memberEdges.length; ++j) {
+                    d.memberEdges[j] = $root.proto.RotateEpochMemberEdge.toObject(m.memberEdges[j], o, q + 1);
+                }
+            }
+            if (m.epochRootKeyFingerprint != null && Object.hasOwnProperty.call(m, "epochRootKeyFingerprint")) {
+                d.epochRootKeyFingerprint = o.bytes === String ? $util.base64.encode(m.epochRootKeyFingerprint, 0, m.epochRootKeyFingerprint.length) : o.bytes === Array ? Array.prototype.slice.call(m.epochRootKeyFingerprint) : m.epochRootKeyFingerprint;
+                if (o.oneofs)
+                    d._epochRootKeyFingerprint = "epochRootKeyFingerprint";
+            }
+            if (m.error != null && Object.hasOwnProperty.call(m, "error")) {
+                d.error = m.error;
+                if (o.oneofs)
+                    d._error = "error";
+            }
+            if (m.newEpochFbid != null && Object.hasOwnProperty.call(m, "newEpochFbid")) {
+                if (typeof BigInt !== "undefined" && o.longs === BigInt)
+                    d.newEpochFbid = typeof m.newEpochFbid === "number" ? BigInt(m.newEpochFbid) : $util.Long.fromBits(m.newEpochFbid.low >>> 0, m.newEpochFbid.high >>> 0, true).toBigInt();
+                else if (typeof m.newEpochFbid === "number")
+                    d.newEpochFbid = o.longs === String ? String(m.newEpochFbid) : m.newEpochFbid;
+                else
+                    d.newEpochFbid = o.longs === String ? longToString(m.newEpochFbid, true) : o.longs === Number ? longToNumber(m.newEpochFbid, true) : m.newEpochFbid;
+                if (o.oneofs)
+                    d._newEpochFbid = "newEpochFbid";
+            }
+            return d;
+        };
+
+        RotateEpochOutput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RotateEpochOutput;
+    })();
+
     proto.RoutingInfo = (function() {
 
         function RoutingInfo(p) {
@@ -108520,144 +111919,6 @@ export const proto = $root.proto = (() => {
         };
 
         return StickerMetadata;
-    })();
-
-    proto.SubProtocol = (function() {
-
-        function SubProtocol(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null && ks[i] !== "__proto__")
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        SubProtocol.prototype.payload = null;
-        SubProtocol.prototype.version = null;
-
-        let $oneOfFields;
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(SubProtocol.prototype, "_payload", {
-            get: $util.oneOfGetter($oneOfFields = ["payload"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        // Virtual OneOf for proto3 optional field
-        Object.defineProperty(SubProtocol.prototype, "_version", {
-            get: $util.oneOfGetter($oneOfFields = ["version"]),
-            set: $util.oneOfSetter($oneOfFields)
-        });
-
-        SubProtocol.create = function create(properties) {
-            return new SubProtocol(properties);
-        };
-
-        SubProtocol.encode = function encode(m, w, q) {
-            if (!w)
-                w = $Writer.create();
-            if (q === undefined)
-                q = 0;
-            if (q > $util.recursionLimit)
-                throw Error("max depth exceeded");
-            if (m.payload != null && Object.hasOwnProperty.call(m, "payload"))
-                w.uint32(10).bytes(m.payload);
-            if (m.version != null && Object.hasOwnProperty.call(m, "version"))
-                w.uint32(16).int32(m.version);
-            return w;
-        };
-
-        SubProtocol.decode = function decode(r, l, e, n) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            if (n === undefined)
-                n = 0;
-            if (n > $Reader.recursionLimit)
-                throw Error("maximum nesting depth exceeded");
-            var c, m;
-            if (l === undefined)
-                c = r.len;
-            else {
-                c = r.pos + l;
-                if (c > r.len)
-                    throw RangeError("index out of range");
-                l = r.len;
-                r.len = c;
-            }
-            m = new $root.proto.SubProtocol();
-            while (r.pos < c) {
-                var t = r.uint32();
-                if (t === e)
-                    break;
-                switch (t >>> 3) {
-                case 1: {
-                        m.payload = r.bytes();
-                        break;
-                    }
-                case 2: {
-                        m.version = r.int32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7, n);
-                    break;
-                }
-            }
-            if (l !== undefined) {
-                if (r.pos !== c)
-                    throw RangeError("index out of range");
-                r.len = l;
-            }
-            return m;
-        };
-
-        SubProtocol.fromObject = function fromObject(d, n) {
-            if (d instanceof $root.proto.SubProtocol)
-                return d;
-            if (!$util.isObject(d))
-                throw TypeError(".proto.SubProtocol: object expected");
-            if (n === undefined)
-                n = 0;
-            if (n > $util.recursionLimit)
-                throw Error("maximum nesting depth exceeded");
-            var m = new $root.proto.SubProtocol();
-            if (d.payload != null) {
-                if (typeof d.payload === "string")
-                    $util.base64.decode(d.payload, m.payload = $util.newBuffer($util.base64.length(d.payload)), 0);
-                else if (d.payload.length >= 0)
-                    m.payload = d.payload;
-            }
-            if (d.version != null) {
-                m.version = d.version | 0;
-            }
-            return m;
-        };
-
-        SubProtocol.toObject = function toObject(m, o, q) {
-            if (!o)
-                o = {};
-            if (q === undefined)
-                q = 0;
-            if (q > $util.recursionLimit)
-                throw Error("max depth exceeded");
-            var d = {};
-            if (m.payload != null && Object.hasOwnProperty.call(m, "payload")) {
-                d.payload = o.bytes === String ? $util.base64.encode(m.payload, 0, m.payload.length) : o.bytes === Array ? Array.prototype.slice.call(m.payload) : m.payload;
-                if (o.oneofs)
-                    d._payload = "payload";
-            }
-            if (m.version != null && Object.hasOwnProperty.call(m, "version")) {
-                d.version = m.version;
-                if (o.oneofs)
-                    d._version = "version";
-            }
-            return d;
-        };
-
-        SubProtocol.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        return SubProtocol;
     })();
 
     proto.SyncActionData = (function() {
@@ -130502,6 +133763,260 @@ export const proto = $root.proto = (() => {
         })();
 
         return VerifiedNameCertificate;
+    })();
+
+    proto.VirtualDeviceOutput = (function() {
+
+        function VirtualDeviceOutput(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null && ks[i] !== "__proto__")
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        VirtualDeviceOutput.prototype.vdId = $util.newBuffer([]);
+        VirtualDeviceOutput.prototype.vdPublicKey = $util.newBuffer([]);
+        VirtualDeviceOutput.prototype.vdEpochStoragePublicKey = $util.newBuffer([]);
+        VirtualDeviceOutput.prototype.vdEpochStoragePublicKeySig = $util.newBuffer([]);
+        VirtualDeviceOutput.prototype.ocmfRotationToken = $util.newBuffer([]);
+        VirtualDeviceOutput.prototype.deviceEpochHmac = $util.newBuffer([]);
+        VirtualDeviceOutput.prototype.encryptedSecretValues = null;
+
+        VirtualDeviceOutput.create = function create(properties) {
+            return new VirtualDeviceOutput(properties);
+        };
+
+        VirtualDeviceOutput.encode = function encode(m, w, q) {
+            if (!w)
+                w = $Writer.create();
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            w.uint32(10).bytes(m.vdId);
+            w.uint32(18).bytes(m.vdPublicKey);
+            w.uint32(26).bytes(m.vdEpochStoragePublicKey);
+            w.uint32(34).bytes(m.vdEpochStoragePublicKeySig);
+            w.uint32(42).bytes(m.ocmfRotationToken);
+            w.uint32(50).bytes(m.deviceEpochHmac);
+            $root.proto.EncryptedSecretValuesOutput.encode(m.encryptedSecretValues, w.uint32(58).fork(), q + 1).ldelim();
+            return w;
+        };
+
+        VirtualDeviceOutput.decode = function decode(r, l, e, n) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            if (n === undefined)
+                n = 0;
+            if (n > $Reader.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var c, m;
+            if (l === undefined)
+                c = r.len;
+            else {
+                c = r.pos + l;
+                if (c > r.len)
+                    throw RangeError("index out of range");
+                l = r.len;
+                r.len = c;
+            }
+            m = new $root.proto.VirtualDeviceOutput();
+            while (r.pos < c) {
+                var t = r.uint32();
+                if (t === e)
+                    break;
+                switch (t >>> 3) {
+                case 1: {
+                        m.vdId = r.bytes();
+                        break;
+                    }
+                case 2: {
+                        m.vdPublicKey = r.bytes();
+                        break;
+                    }
+                case 3: {
+                        m.vdEpochStoragePublicKey = r.bytes();
+                        break;
+                    }
+                case 4: {
+                        m.vdEpochStoragePublicKeySig = r.bytes();
+                        break;
+                    }
+                case 5: {
+                        m.ocmfRotationToken = r.bytes();
+                        break;
+                    }
+                case 6: {
+                        m.deviceEpochHmac = r.bytes();
+                        break;
+                    }
+                case 7: {
+                        m.encryptedSecretValues = $root.proto.EncryptedSecretValuesOutput.decode(r, r.uint32(), undefined, n + 1);
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7, n);
+                    break;
+                }
+            }
+            if (l !== undefined) {
+                if (r.pos !== c)
+                    throw RangeError("index out of range");
+                r.len = l;
+            }
+            if (!Object.hasOwnProperty.call(m, "vdId"))
+                throw $util.ProtocolError("missing required 'vdId'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "vdPublicKey"))
+                throw $util.ProtocolError("missing required 'vdPublicKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "vdEpochStoragePublicKey"))
+                throw $util.ProtocolError("missing required 'vdEpochStoragePublicKey'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "vdEpochStoragePublicKeySig"))
+                throw $util.ProtocolError("missing required 'vdEpochStoragePublicKeySig'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "ocmfRotationToken"))
+                throw $util.ProtocolError("missing required 'ocmfRotationToken'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "deviceEpochHmac"))
+                throw $util.ProtocolError("missing required 'deviceEpochHmac'", { instance: m });
+            if (!Object.hasOwnProperty.call(m, "encryptedSecretValues"))
+                throw $util.ProtocolError("missing required 'encryptedSecretValues'", { instance: m });
+            return m;
+        };
+
+        VirtualDeviceOutput.fromObject = function fromObject(d, n) {
+            if (d instanceof $root.proto.VirtualDeviceOutput)
+                return d;
+            if (!$util.isObject(d))
+                throw TypeError(".proto.VirtualDeviceOutput: object expected");
+            if (n === undefined)
+                n = 0;
+            if (n > $util.recursionLimit)
+                throw Error("maximum nesting depth exceeded");
+            var m = new $root.proto.VirtualDeviceOutput();
+            if (d.vdId != null) {
+                if (typeof d.vdId === "string")
+                    $util.base64.decode(d.vdId, m.vdId = $util.newBuffer($util.base64.length(d.vdId)), 0);
+                else if (d.vdId.length >= 0)
+                    m.vdId = d.vdId;
+            }
+            if (d.vdPublicKey != null) {
+                if (typeof d.vdPublicKey === "string")
+                    $util.base64.decode(d.vdPublicKey, m.vdPublicKey = $util.newBuffer($util.base64.length(d.vdPublicKey)), 0);
+                else if (d.vdPublicKey.length >= 0)
+                    m.vdPublicKey = d.vdPublicKey;
+            }
+            if (d.vdEpochStoragePublicKey != null) {
+                if (typeof d.vdEpochStoragePublicKey === "string")
+                    $util.base64.decode(d.vdEpochStoragePublicKey, m.vdEpochStoragePublicKey = $util.newBuffer($util.base64.length(d.vdEpochStoragePublicKey)), 0);
+                else if (d.vdEpochStoragePublicKey.length >= 0)
+                    m.vdEpochStoragePublicKey = d.vdEpochStoragePublicKey;
+            }
+            if (d.vdEpochStoragePublicKeySig != null) {
+                if (typeof d.vdEpochStoragePublicKeySig === "string")
+                    $util.base64.decode(d.vdEpochStoragePublicKeySig, m.vdEpochStoragePublicKeySig = $util.newBuffer($util.base64.length(d.vdEpochStoragePublicKeySig)), 0);
+                else if (d.vdEpochStoragePublicKeySig.length >= 0)
+                    m.vdEpochStoragePublicKeySig = d.vdEpochStoragePublicKeySig;
+            }
+            if (d.ocmfRotationToken != null) {
+                if (typeof d.ocmfRotationToken === "string")
+                    $util.base64.decode(d.ocmfRotationToken, m.ocmfRotationToken = $util.newBuffer($util.base64.length(d.ocmfRotationToken)), 0);
+                else if (d.ocmfRotationToken.length >= 0)
+                    m.ocmfRotationToken = d.ocmfRotationToken;
+            }
+            if (d.deviceEpochHmac != null) {
+                if (typeof d.deviceEpochHmac === "string")
+                    $util.base64.decode(d.deviceEpochHmac, m.deviceEpochHmac = $util.newBuffer($util.base64.length(d.deviceEpochHmac)), 0);
+                else if (d.deviceEpochHmac.length >= 0)
+                    m.deviceEpochHmac = d.deviceEpochHmac;
+            }
+            if (d.encryptedSecretValues != null) {
+                if (!$util.isObject(d.encryptedSecretValues))
+                    throw TypeError(".proto.VirtualDeviceOutput.encryptedSecretValues: object expected");
+                m.encryptedSecretValues = $root.proto.EncryptedSecretValuesOutput.fromObject(d.encryptedSecretValues, n + 1);
+            }
+            return m;
+        };
+
+        VirtualDeviceOutput.toObject = function toObject(m, o, q) {
+            if (!o)
+                o = {};
+            if (q === undefined)
+                q = 0;
+            if (q > $util.recursionLimit)
+                throw Error("max depth exceeded");
+            var d = {};
+            if (o.defaults) {
+                if (o.bytes === String)
+                    d.vdId = "";
+                else {
+                    d.vdId = [];
+                    if (o.bytes !== Array)
+                        d.vdId = $util.newBuffer(d.vdId);
+                }
+                if (o.bytes === String)
+                    d.vdPublicKey = "";
+                else {
+                    d.vdPublicKey = [];
+                    if (o.bytes !== Array)
+                        d.vdPublicKey = $util.newBuffer(d.vdPublicKey);
+                }
+                if (o.bytes === String)
+                    d.vdEpochStoragePublicKey = "";
+                else {
+                    d.vdEpochStoragePublicKey = [];
+                    if (o.bytes !== Array)
+                        d.vdEpochStoragePublicKey = $util.newBuffer(d.vdEpochStoragePublicKey);
+                }
+                if (o.bytes === String)
+                    d.vdEpochStoragePublicKeySig = "";
+                else {
+                    d.vdEpochStoragePublicKeySig = [];
+                    if (o.bytes !== Array)
+                        d.vdEpochStoragePublicKeySig = $util.newBuffer(d.vdEpochStoragePublicKeySig);
+                }
+                if (o.bytes === String)
+                    d.ocmfRotationToken = "";
+                else {
+                    d.ocmfRotationToken = [];
+                    if (o.bytes !== Array)
+                        d.ocmfRotationToken = $util.newBuffer(d.ocmfRotationToken);
+                }
+                if (o.bytes === String)
+                    d.deviceEpochHmac = "";
+                else {
+                    d.deviceEpochHmac = [];
+                    if (o.bytes !== Array)
+                        d.deviceEpochHmac = $util.newBuffer(d.deviceEpochHmac);
+                }
+                d.encryptedSecretValues = null;
+            }
+            if (m.vdId != null && Object.hasOwnProperty.call(m, "vdId")) {
+                d.vdId = o.bytes === String ? $util.base64.encode(m.vdId, 0, m.vdId.length) : o.bytes === Array ? Array.prototype.slice.call(m.vdId) : m.vdId;
+            }
+            if (m.vdPublicKey != null && Object.hasOwnProperty.call(m, "vdPublicKey")) {
+                d.vdPublicKey = o.bytes === String ? $util.base64.encode(m.vdPublicKey, 0, m.vdPublicKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.vdPublicKey) : m.vdPublicKey;
+            }
+            if (m.vdEpochStoragePublicKey != null && Object.hasOwnProperty.call(m, "vdEpochStoragePublicKey")) {
+                d.vdEpochStoragePublicKey = o.bytes === String ? $util.base64.encode(m.vdEpochStoragePublicKey, 0, m.vdEpochStoragePublicKey.length) : o.bytes === Array ? Array.prototype.slice.call(m.vdEpochStoragePublicKey) : m.vdEpochStoragePublicKey;
+            }
+            if (m.vdEpochStoragePublicKeySig != null && Object.hasOwnProperty.call(m, "vdEpochStoragePublicKeySig")) {
+                d.vdEpochStoragePublicKeySig = o.bytes === String ? $util.base64.encode(m.vdEpochStoragePublicKeySig, 0, m.vdEpochStoragePublicKeySig.length) : o.bytes === Array ? Array.prototype.slice.call(m.vdEpochStoragePublicKeySig) : m.vdEpochStoragePublicKeySig;
+            }
+            if (m.ocmfRotationToken != null && Object.hasOwnProperty.call(m, "ocmfRotationToken")) {
+                d.ocmfRotationToken = o.bytes === String ? $util.base64.encode(m.ocmfRotationToken, 0, m.ocmfRotationToken.length) : o.bytes === Array ? Array.prototype.slice.call(m.ocmfRotationToken) : m.ocmfRotationToken;
+            }
+            if (m.deviceEpochHmac != null && Object.hasOwnProperty.call(m, "deviceEpochHmac")) {
+                d.deviceEpochHmac = o.bytes === String ? $util.base64.encode(m.deviceEpochHmac, 0, m.deviceEpochHmac.length) : o.bytes === Array ? Array.prototype.slice.call(m.deviceEpochHmac) : m.deviceEpochHmac;
+            }
+            if (m.encryptedSecretValues != null && Object.hasOwnProperty.call(m, "encryptedSecretValues")) {
+                d.encryptedSecretValues = $root.proto.EncryptedSecretValuesOutput.toObject(m.encryptedSecretValues, o, q + 1);
+            }
+            return d;
+        };
+
+        VirtualDeviceOutput.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return VirtualDeviceOutput;
     })();
 
     proto.WallpaperSettings = (function() {
