@@ -1,6 +1,7 @@
+// Source: https://raw.githubusercontent.com/WhiskeySockets/Baileys/refs/heads/master/WAProto/fix-imports.js
+
 const { readFileSync, writeFileSync } = require('node:fs')
 const { resolve } = require('node:path')
-const { exit } = require('node:process')
 
 const filePath = resolve(__dirname, '../dist/index.js')
 
@@ -84,5 +85,4 @@ try {
 catch (error) {
   console.error(error)
   console.error(`❌ Error fixing imports: ${error.message}`)
-  exit(1)
 }
