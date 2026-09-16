@@ -16,9 +16,10 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "build": "npm run fetch && npm run compile",
-    "compile": "npm run compile:js && npm run compile:ts",
-    "compile:js": "node scripts/patch-protobufjs-parser.js && pbjs -t static-module --no-beautify -w es6 --no-bundle --no-delimited --no-verify --no-comments --no-service --no-typeurl -o ./dist/index.js ./WAProto.proto && node scripts/fix-imports.js && node scripts/minify.js",
-    "compile:ts": "pbjs -t static-module --no-beautify -w es6 --no-bundle --no-delimited --no-verify --no-service --no-typeurl ./WAProto.proto | pbts --no-comments -o ./index.d.ts -",
+    "compile": "npm run compile:generate && npm run compile:ts && npm run compile:js",
+    "compile:generate": "node scripts/patch-protobufjs-parser.js && pbjs -t static-module --no-beautify -w es6 --no-bundle --no-delimited --no-verify --no-comments --no-service --no-typeurl -o ./dist/index.generated.js ./WAProto.proto",
+    "compile:ts": "pbts --no-comments -o ./dist/index.d.ts ./dist/index.generated.js",
+    "compile:js": "cp ./dist/index.generated.js ./dist/index.js && node scripts/fix-imports.js && node scripts/minify.js && rm ./dist/index.generated.js",
     "fetch": "node index.js"
   },
   "dependencies": {

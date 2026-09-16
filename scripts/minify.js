@@ -1,7 +1,6 @@
 const { readFileSync, writeFileSync } = require('node:fs')
 const { resolve } = require('node:path')
 const { build } = require('esbuild')
-const { minify } = require('terser')
 
 ;(async () => {
   const filePath = resolve(__dirname, '../dist/index.js')
@@ -14,9 +13,8 @@ const { minify } = require('terser')
     write: false,
     format: 'esm',
     platform: 'node',
-    target: 'es2020',
-    treeShaking: true,
-    minify: false
+    target: 'es2022',
+    minify: true
   })
 
   const code = result.outputFiles[0].text
@@ -24,27 +22,7 @@ const { minify } = require('terser')
   if (!code)
     throw new Error('❌ Empty return from esbuild')
 
-  const terser = await minify(code, {
-    module: true,
-    compress: {
-      passes: 3,
-      toplevel: true,
-      defaults: true
-    },
-    mangle: {
-      toplevel: true
-    },
-    format: {
-      comments: false,
-      beautify: false
-    },
-    ecma: 2020
-  })
-
-  if (!terser.code)
-    throw new Error('❌ Empty return from Terser')
-
-  writeFileSync(filePath, HEADER + '\n' + terser.code, 'utf8')
+  writeFileSync(filePath, HEADER + '\n' + code, 'utf8')
   console.log(`✅ Minified in ${filePath}`)
 })().catch((error) => {
   console.error(error)
