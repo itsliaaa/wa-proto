@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto;
 
-/// WhatsApp Version: 2.3000.1048092860
+/// WhatsApp Version: 2.3000.1048152143
 
 message ACP2Setting {
     optional bool enabled = 1;
@@ -1076,12 +1076,6 @@ message BotUnifiedResponseMutation {
     
 }
 
-enum COMMAND_COMMAND_TYPE {
-    EVERYONE = 1;
-    SILENT = 2;
-    AI = 3;
-    AI_IMAGINE = 4;
-}
 message CallLogRecord {
     optional CallResult callResult = 1;
     optional bool isDndMode = 2;
@@ -1474,13 +1468,6 @@ message CombinedFingerprint {
     optional uint32 version = 1;
     optional FingerprintData localFingerprint = 2;
     optional FingerprintData remoteFingerprint = 3;
-}
-
-message Command {
-    optional COMMAND_COMMAND_TYPE commandType = 1;
-    optional uint32 offset = 2;
-    optional uint32 length = 3;
-    optional string validationToken = 4;
 }
 
 message CommentMetadata {
@@ -2111,11 +2098,6 @@ message ExternalBlobReference {
     optional bytes fileEncSha256 = 6;
 }
 
-enum FUTURE_PROOF_BEHAVIOR {
-    PLACEHOLDER = 0;
-    NO_PLACEHOLDER = 1;
-    IGNORE = 2;
-}
 message Field {
     optional uint32 minVersion = 1;
     optional uint32 maxVersion = 2;
@@ -2491,9 +2473,6 @@ message Location {
     optional string name = 3;
 }
 
-enum MENTION_MENTION_TYPE {
-    PROFILE = 0;
-}
 message MediaData {
     optional string localPath = 1;
 }
@@ -2569,13 +2548,6 @@ enum MediaVisibility {
 message MemberLabel {
     optional string label = 1;
     optional int64 labelTimestamp = 2;
-}
-
-message Mention {
-    optional MENTION_MENTION_TYPE mentionType = 1;
-    optional string mentionedJid = 2;
-    optional uint32 offset = 3;
-    optional uint32 length = 4;
 }
 
 message Message {
@@ -4592,13 +4564,6 @@ message MessageSecretMessage {
     optional bytes encPayload = 3;
 }
 
-message MessageText {
-    optional string text = 1;
-    repeated string mentionedJid = 2;
-    repeated Command commands = 3;
-    repeated Mention mentions = 4;
-}
-
 message Money {
     optional int64 value = 1;
     optional uint32 offset = 2;
@@ -5423,11 +5388,6 @@ message StickerMetadata {
     optional bool isLottie = 12;
     optional string imageHash = 13;
     optional bool isAvatarSticker = 14;
-}
-
-message SubProtocol {
-    optional bytes payload = 1;
-    optional int32 version = 2;
 }
 
 message SyncActionData {
