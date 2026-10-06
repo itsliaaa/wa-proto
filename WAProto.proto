@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto;
 
-/// WhatsApp Version: 2.3000.1049278195
+/// WhatsApp Version: 2.3000.1049395099
 
 message ACP2Setting {
     optional bool enabled = 1;
@@ -493,6 +493,7 @@ message BotCapabilityMetadata {
         AI_STOP_GENERATION_ENABLED = 70;
         AI_RICH_RESPONSE_3P_LINKING_CARD_ENABLED = 71;
         HATCH_NOTIFICATION_METADATA_EVENT_ENABLED = 72;
+        HATCH_CONNECTOR_ACTION_CARD_ENABLED = 76;
     }
 }
 
@@ -1934,7 +1935,7 @@ message DecryptMekForDistributionSuccess {
 message DecryptSelfMmkDistributionInput {
     required bytes encryptedMmk = 1;
     required bytes exportRootKey = 2;
-    required bytes mailboxHeadHash = 3;
+    required MessagingMailboxPublicData mmkPublicData = 3;
 }
 
 message DecryptSelfMmkDistributionResult {
@@ -2038,6 +2039,8 @@ message DeviceCapabilities {
     optional AiFbidMigration aiFbidMigration = 7;
     optional BizAiSettingsSync bizAiSettingsSync = 8;
     optional ContactRefresh contactRefresh = 9;
+    optional ReverseHistorySync reverseHistorySync = 10;
+    optional NewsletterChatsMigration newsletterChatsMigration = 11;
     message AiFbidMigration {
         optional uint64 chatDbMigrationTimestamp = 1;
         optional uint32 supportVersion = 2;
@@ -2083,6 +2086,20 @@ message DeviceCapabilities {
         RECEIVER_ENABLED = 1;
         SENDER_ENABLED = 2;
     }
+    message NewsletterChatsMigration {
+        optional bool effectiveMigrated = 1;
+        optional int64 countdownEndsAt = 2;
+        optional bool rolledBack = 3;
+    }
+    
+    message ReverseHistorySync {
+        repeated Product enabledProducts = 1;
+        enum Product {
+            PRODUCT_UNSPECIFIED = 0;
+            HATCH = 1;
+        }
+    }
+    
     message UserHasAvatar {
         optional bool userHasAvatar = 1;
     }
@@ -3000,6 +3017,30 @@ message MandrakeOpenInitialEpochResult {
         MandrakeOpenEpochSuccess success = 1;
         string errorMessage = 2;
     }
+}
+
+message MandrakeValidateAndDecryptSelfMmkInput {
+    required MessagingMailboxPublicData newMmk = 1;
+    required bytes signature = 2;
+    optional MessagingMailboxPublicData existingMmk = 3;
+    required bytes exportRootKey = 4;
+    required uint64 epochNumber = 5;
+    required bytes expectedEpochHead = 6;
+    required bytes encryptedMmk = 7;
+    required uint64 version = 8;
+    optional MessagingMailboxPublicData latestStoredMmk = 9;
+}
+
+message MandrakeValidateAndDecryptSelfMmkResult {
+    oneof result {
+        MandrakeValidateAndDecryptSelfMmkSuccess success = 1;
+        string errorMessage = 2;
+    }
+}
+
+message MandrakeValidateAndDecryptSelfMmkSuccess {
+    required bytes mmkSeed = 1;
+    required bytes mailboxHeadHash = 2;
 }
 
 message MandrakeValidateNewMmkFromDetachedDeviceInput {
@@ -5186,6 +5227,7 @@ message MinosCommand {
         MandrakeValidateNewMmkFromDetachedDeviceInput mandrakeValidateNewMmkFromDetachedDevice = 28;
         DeriveMessagingMailboxKeypairsInput deriveMessagingMailboxKeypairs = 29;
         DecryptSelfMmkDistributionInput decryptSelfMmkDistribution = 30;
+        MandrakeValidateAndDecryptSelfMmkInput mandrakeValidateAndDecryptSelfMmk = 31;
     }
 }
 
